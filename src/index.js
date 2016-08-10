@@ -1,7 +1,7 @@
+import './index.css';
+import Gravatar from 'react-gravatar';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Gravatar from 'react-gravatar';
-import './index.css';
 
 ReactDOM.render(
   <div>

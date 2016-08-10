@@ -2,21 +2,24 @@
   "name": "spudly.github.io",
   "private": true,
   "devDependencies": {
+    "@spudly/eslint-config": "^2.1.1",
     "react-scripts": "0.2.1"
   },
   "homepage": "http://spudly.github.io",
   "dependencies": {
-    "react": "^15.2.1",
-    "react-dom": "^15.2.1",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
     "react-gravatar": "^2.4.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && echo 'www.stephenjohnsorensen.com' > build/CNAME",
     "eject": "react-scripts eject",
-    "deploy": "./scripts/deploy.sh"
+    "deploy": "./scripts/deploy.sh",
+    "test": "npm run lint",
+    "lint": "lint src"
   },
   "eslintConfig": {
-    "extends": "./node_modules/react-scripts/config/eslint.js"
+    "extends": "@spudly"
   }
 }
