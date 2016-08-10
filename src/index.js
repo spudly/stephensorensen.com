@@ -10,7 +10,7 @@ ReactDOM.render(
     <Gravatar email="shuoink@gmail.com" size={250} />
 
     <p>
-      I'm Stephen Sorensen. I'm a frontend web developer living in the Atlanta,
+      I am Stephen Sorensen. I'm a frontend web developer living in the Atlanta,
       GA area. I work for <a href="https://www.theice.com">Intercontinental
       Exchange, Inc.</a>, where I develop frontend javascript components for
       multiple websites, including the website for the
