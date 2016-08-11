@@ -1,0 +1,12 @@
+body[data-theme="90s"] {
+  background: url(stars.gif);
+  font-family: 'Comic Sans', 'Comic Sans MS', cursive;
+  color: white;
+}
+
+body[data-theme="90s"]:after {
+  display: block;
+  margin-top: 1em;
+  text-align: center;
+  content: url('counter.gif');
+}

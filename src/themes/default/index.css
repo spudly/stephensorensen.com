@@ -1,0 +1,5 @@
+@import 'https://fonts.googleapis.com/css?family=Raleway';
+
+body[data-theme="default"], body:not([data-theme]) {
+  font-family: 'Raleway', sans-serif;
+}
