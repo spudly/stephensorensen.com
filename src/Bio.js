@@ -1,12 +1,13 @@
 import Gravatar from 'react-gravatar';
 import React from 'react';
+import Social from './Social';
 
 const Bio = () =>
-  <div>
-    <Gravatar email="shuoink@gmail.com" size={250} />
+  <div className="h-card">
+    <Gravatar email="shuoink@gmail.com" size={250} className="u-photo" />
 
     <p>
-      Hey, I&apos;m Stephen Sorensen. I&apos;m a JavaScript developer living in the
+      Hey, I&apos;m <span className="p-name">Stephen Sorensen</span>. I&apos;m a JavaScript developer living in the
       Atlanta, GA area. I work for {' '}
       <a href="https://www.theice.com">Intercontinental
       Exchange, Inc.</a>, where I develop frontend, backend, and universal
@@ -21,6 +22,8 @@ const Bio = () =>
     <p>As you can see, this page is (always) under construction.</p>
 
     <p>No, I&apos;m not looking for a job, but thanks for asking.</p>
+
+    <Social />
   </div>;
 
 Bio.displayName = 'Bio';
