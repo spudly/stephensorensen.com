@@ -1,5 +1,4 @@
 import Gravatar from 'react-gravatar';
-import OssProject from './OssProject';
 import React from 'react';
 
 const Bio = () =>
@@ -9,7 +8,7 @@ const Bio = () =>
     <Gravatar email="shuoink@gmail.com" size={250} />
 
     <p>
-      I am Stephen Sorensen. I'm a frontend web developer living in the Atlanta,
+      I am Stephen Sorensen. I'm a JavaScript developer living in the Atlanta,
       GA area. I work for <a href="https://www.theice.com">Intercontinental
       Exchange, Inc.</a>, where I develop frontend javascript components for
       multiple websites, including the website for the{' '}
@@ -20,19 +19,9 @@ const Bio = () =>
       political junkie.
     </p>
 
-    <p>As you can see, this page is under construction.</p>
+    <p>As you can see, this page is (always) under construction.</p>
 
     <p>No, I'm not looking for a job, but thanks for asking.</p>
-
-    <h1>My Open Source Projects</h1>
-    <OssProject name="error-subclass" />
-    <OssProject name="talk-like-a-pirate" />
-    <OssProject name="react-card" />
-    <OssProject name="react-deck" />
-    <OssProject name="error-wrapper" />
-    <OssProject name="eslint-config" scope="@spudly/" />
-    <OssProject name="index-card.css" />
-    <OssProject name="card.css" />
   </div>;
 
 Bio.displayName = 'Bio';
