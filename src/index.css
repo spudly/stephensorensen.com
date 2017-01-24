@@ -4,3 +4,9 @@
   top: 0;
   padding: 1em;
 }
+
+html, body, .root {
+  min-height: 100%;
+  padding: 0;
+  margin: 0;
+}
