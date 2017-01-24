@@ -12,7 +12,7 @@ const Social = () => (
       <li><a rel="me" href="https://github.com/spudly">Github</a></li>
       <li><a rel="me" href="http://stackoverflow.com/users/163699/spudly">StackOverflow</a></li>
       <li><a rel="me" href="https://www.linkedin.com/in/stephensorensen">LinkedIn</a></li>
-      <li><a rel="me" href="mailto:shuoink@gmail.com">Email: shuoink@gmail.com</a></li>
+      <li><a rel="me" className="u-email" href="mailto:shuoink@gmail.com">Email: shuoink@gmail.com</a></li>
     </ul>
 
   </div>
