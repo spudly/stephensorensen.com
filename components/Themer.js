@@ -1,7 +1,5 @@
 /* global localStorage */
 
-import './themes/90s/index.css';
-import './themes/default/index.css';
 import React from 'react';
 
 class Themer extends React.Component {
@@ -10,19 +8,21 @@ class Themer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      theme: localStorage.getItem('theme') || 'default',
+      theme: 'default',
     };
   }
 
   componentDidMount() {
-    this._injectTheme();
+    this.setState({
+      theme: localStorage.getItem('theme') || 'default',
+    }, this._injectTheme());
   }
 
   componentDidUpdate() {
     this._injectTheme();
   }
 
-  _injectTheme() {
+  _injectTheme = () => {
     document.body.setAttribute('data-theme', this.state.theme);
   }
 
