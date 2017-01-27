@@ -3,9 +3,9 @@ import React from 'react';
 
 const Bio = () =>
   <div className="h-card page">
-    <h1>&lt;Bio /&gt;</h1>
+    <h1 className="page-header">&lt;Bio /&gt;</h1>
 
-    <Gravatar email="shuoink@gmail.com" size={250} className="u-photo" />
+    <Gravatar email="shuoink@gmail.com" size={250} className="u-photo" width={null} height={null} />
 
     <p>
       Hey, I&apos;m <span className="p-name">Stephen Sorensen</span>. I&apos;m a JavaScript developer living in the

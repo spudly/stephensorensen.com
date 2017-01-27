@@ -1,12 +1,23 @@
+@import '~normalize.css';
 @import 'https://fonts.googleapis.com/css?family=Raleway';
-@import './nav.css';
+@import './modules/nav.css';
 
-html, body, .root {
+
+.full-height {
+  height: 0; /* makes min-height work for some reason. chrome bug? */
   min-height: 100%;
   padding: 0;
   margin: 0;
 }
 
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: scroll; /* always show scrollbars to reduce flicker */
+}
 
 body {
   font-family: 'Raleway', sans-serif;
@@ -18,13 +29,16 @@ body {
 }
 
 .page {
-  box-sizing: border-box;
   background: white;
   margin: 0 auto;
   width: 900px;
-  max-width: calc(100% - 1em);
+  max-width: 100%;
   min-height: 100%;
   padding: 1em;
+}
+
+.page-header {
+  margin-top: 0;
 }
 
 .page img {
@@ -45,6 +59,13 @@ body {
   transform: rotate(1deg);
 }
 
-.page img:hover {
-  transform: none;
+
+@media (max-width: 450px) {
+  .page img {
+    transform: none;
+    clear: both;
+    float: none;
+    width: 100%;
+    margin: 0;
+  }
 }

@@ -1,8 +1,8 @@
 .nav {
   display: flex;
   font-size: 1.5rem;
-  box-sizing: border-box;
   width: 900px;
+  max-width: 100%;
   margin: 0 auto;
   list-style: none;
   padding: 0;
@@ -21,7 +21,7 @@
   transition: .25s;
 }
 
-.nav-item > a:hover {
+.nav-item > a:hover, .nav-item > .nav-item-active {
   background-color: #555;
 }
 
