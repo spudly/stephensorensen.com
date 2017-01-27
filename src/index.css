@@ -1,12 +1,50 @@
-.themer {
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 1em;
-}
+@import 'https://fonts.googleapis.com/css?family=Raleway';
+@import './nav.css';
 
 html, body, .root {
   min-height: 100%;
   padding: 0;
   margin: 0;
+}
+
+
+body {
+  font-family: 'Raleway', sans-serif;
+  text-rendering: optimizeLegibility;
+  text-shadow: 0 0 1px transparent;
+  background: #eee;
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.page {
+  box-sizing: border-box;
+  background: white;
+  margin: 0 auto;
+  width: 900px;
+  max-width: calc(100% - 1em);
+  min-height: 100%;
+  padding: 1em;
+}
+
+.page img {
+  transition: .1s;
+}
+
+.page img:nth-of-type(2n+1) {
+  clear:both;
+  float: left;
+  margin-right: 1em;
+  transform: rotate(-1deg);
+}
+
+.page img:nth-of-type(2n) {
+  clear: both;
+  float: right;
+  margin-left: 1em;
+  transform: rotate(1deg);
+}
+
+.page img:hover {
+  transform: none;
 }

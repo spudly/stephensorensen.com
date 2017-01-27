@@ -2,7 +2,9 @@ import Gravatar from 'react-gravatar';
 import React from 'react';
 
 const Bio = () =>
-  <div className="h-card">
+  <div className="h-card page">
+    <h1>&lt;Bio /&gt;</h1>
+
     <Gravatar email="shuoink@gmail.com" size={250} className="u-photo" />
 
     <p>

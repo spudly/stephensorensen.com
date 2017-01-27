@@ -1,0 +1,36 @@
+.nav {
+  display: flex;
+  font-size: 1.5rem;
+  box-sizing: border-box;
+  width: 900px;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+  background-color: #444;
+}
+
+.nav-item {
+  display: block;
+}
+
+.nav-item > a {
+  text-decoration: none;
+  color: white;
+  display: block;
+  padding: .25em;
+  transition: .25s;
+}
+
+.nav-item > a:hover {
+  background-color: #555;
+}
+
+@media (min-width: 1300px) {
+  .nav {
+    display: block;
+    width: 200px;
+    position: absolute;
+    top: 0px;
+    left: calc((100% - 900px) / 2 + 900px);
+  }
+}
