@@ -1,5 +1,7 @@
 # spudly.github.io
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/spudly/spudly.github.io.svg)](https://greenkeeper.io/)
+
 Personal website for Stephen Sorensen
 
 # TODO
