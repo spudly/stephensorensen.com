@@ -1,15 +1,39 @@
 .nav {
-  display: flex;
   font-size: 1.5rem;
   width: 900px;
   max-width: 100%;
   margin: 0 auto;
-  list-style: none;
-  padding: 0;
   background-color: #444;
 }
 
+.nav-toggle {
+  display: block;
+  outline: 0;
+  height: 48px;
+}
+
+.nav-toggle {
+  font-size: inherit;
+  border: 0;
+  background: none;
+  display: block;
+  width: 100%;
+  text-align: right;
+  padding: .25em;
+  color: white;
+}
+
+.nav-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 .nav-item {
+  display: none;
+}
+
+.nav.nav-open .nav-item {
   display: block;
 }
 
@@ -25,12 +49,12 @@
   background-color: #555;
 }
 
-@media (min-width: 1300px) {
-  .nav {
-    display: block;
-    width: 200px;
-    position: absolute;
-    top: 0px;
-    left: calc((100% - 900px) / 2 + 900px);
-  }
-}
+/*@media (min-width: 1300px) {*/
+/*  .nav {*/
+/*    display: block;*/
+/*    width: 200px;*/
+/*    position: absolute;*/
+/*    top: 0px;*/
+/*    left: calc((100% - 900px) / 2 + 900px);*/
+/*  }*/
+/*}*/

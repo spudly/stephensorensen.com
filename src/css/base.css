@@ -1,0 +1,19 @@
+@import '~normalize.css';
+@import 'https://fonts.googleapis.com/css?family=Raleway';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: scroll; /* always show scrollbars to reduce flicker */
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  text-rendering: optimizeLegibility;
+  text-shadow: 0 0 1px transparent;
+  background: #eee;
+  font-size: 1.25rem;
+  line-height: 1.5;
+}

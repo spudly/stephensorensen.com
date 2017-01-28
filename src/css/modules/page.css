@@ -1,0 +1,41 @@
+.page {
+  background: white;
+  margin: 0 auto;
+  width: 900px;
+  max-width: 100%;
+  min-height: 100%;
+  padding: 1em;
+}
+
+.page-header {
+  margin-top: 0;
+}
+
+.page img {
+  transition: .1s;
+}
+
+.page img:nth-of-type(2n+1) {
+  clear:both;
+  float: left;
+  margin-right: 1em;
+  transform: rotate(-1deg);
+}
+
+.page img:nth-of-type(2n) {
+  clear: both;
+  float: right;
+  margin-left: 1em;
+  transform: rotate(1deg);
+}
+
+
+@media (max-width: 450px) {
+  .page img {
+    transform: none;
+    clear: both;
+    float: none;
+    width: 100%;
+    margin: 0 0 1em 0;
+  }
+}
