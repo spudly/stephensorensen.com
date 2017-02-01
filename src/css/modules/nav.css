@@ -1,7 +1,6 @@
 .nav {
   font-size: 1.5rem;
-  width: 900px;
-  max-width: 100%;
+  width: 100%;
   margin: 0 auto;
   background-color: #444;
 }
@@ -49,12 +48,15 @@
   background-color: #555;
 }
 
-/*@media (min-width: 1300px) {*/
-/*  .nav {*/
-/*    display: block;*/
-/*    width: 200px;*/
-/*    position: absolute;*/
-/*    top: 0px;*/
-/*    left: calc((100% - 900px) / 2 + 900px);*/
-/*  }*/
-/*}*/
+@media (min-width: 800px) {
+  .nav {
+    display: block;
+    width: 80%;
+    max-width: 900px;
+  }
+}
+
+
+    /*position: absolute;*/
+    /*top: 0px;*/
+    /*left: calc((100% - 900px) / 2 + 900px);*/

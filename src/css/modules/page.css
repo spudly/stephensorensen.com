@@ -29,7 +29,6 @@
   transform: rotate(1deg);
 }
 
-
 @media (max-width: 450px) {
   .page img {
     transform: none;
@@ -37,5 +36,13 @@
     float: none;
     width: 100%;
     margin: 0 0 1em 0;
+  }
+}
+
+@media (min-width: 800px) {
+  .page {
+    display: block;
+    width: 80%;
+    max-width: 900px;
   }
 }
