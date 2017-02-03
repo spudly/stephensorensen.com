@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link, Route} from 'react-router-dom';
 import classnames from 'classnames';
 import Burger from './Burger';
 
@@ -25,15 +25,17 @@ class Nav extends React.Component {
         </button>
         <ul className="nav-items">
           {items.map(item => (
-            <li key={item.url} className="nav-item">
-              <Link
-                to={item.url}
-                activeClassName="nav-item-active"
-                onClick={this._toggleOpen}
-              >
-                {item.linkText}
-              </Link>
-            </li>
+            <Route
+              key={item.url}
+              path={item.url}
+              children={({match}) => (
+                <li key={item.url} className={classnames('nav-item', {'nav-item-active': match})}>
+                  <Link to={item.url} onClick={this._toggleOpen}>
+                    {item.linkText}
+                  </Link>
+                </li>
+              )}
+            />
           ))}
         </ul>
       </nav>

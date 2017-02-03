@@ -44,7 +44,7 @@
   transition: .25s;
 }
 
-.nav-item > a:hover, .nav-item > .nav-item-active {
+.nav-item > a:hover, .nav-item-active a {
   background-color: #555;
 }
 

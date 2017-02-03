@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, IndexRedirect, Route, browserHistory} from 'react-router';
+import {HashRouter, Route, Switch, Redirect} from 'react-router-dom';
 import Bio from './Bio';
 import Nav from './Nav';
 import Experiments from './Experiments';
@@ -25,14 +25,16 @@ const App = ({children}) => (
 );
 
 ReactDOM.render(
-  <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <IndexRedirect to="/about" />
-      <Route path="/about" component={Bio} />
-      <Route path="/projects" component={Projects} />
-      <Route path="/experiments" component={Experiments} />
-      <Route path="*" component={Status404} />
-    </Route>
-  </Router>,
+  <HashRouter>
+    <App>
+      <Switch>
+        <Route path="/" exact render={() => <Redirect to="/about" />} />
+        <Route path="/about" component={Bio} />
+        <Route path="/projects" component={Projects} />
+        <Route path="/experiments" component={Experiments} />
+        <Route path="*" component={Status404} />
+      </Switch>
+    </App>
+  </HashRouter>,
   document.querySelector('.root')
 );
