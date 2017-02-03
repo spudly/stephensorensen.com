@@ -25,7 +25,7 @@ const App = ({children}) => (
 );
 
 ReactDOM.render(
-  <HashRouter>
+  <HashRouter hashType="hashbang">
     <App>
       <Switch>
         <Route path="/" exact render={() => <Redirect to="/about" />} />
