@@ -7,7 +7,31 @@ import Bio from './Bio';
 import Nav from './Nav';
 import Experiments from './Experiments';
 import Projects from './Projects';
+import {parse as parseUrl} from 'url';
 import './css/index.css';
+
+import get from 'lodash/fp/get';
+import flowRight from 'lodash/fp/flowRight';
+import fromPairs from 'lodash/fp/fromPairs';
+import map from 'lodash/fp/map';
+import split from 'lodash/fp/split';
+
+const fragment = flowRight(
+  decodeURIComponent,
+  get('_escaped_fragment_'),
+  fromPairs,
+  map(split('=')),
+  split('&'),
+  get('query'),
+  parseUrl
+)(location.href);
+
+if (fragment) {
+  history.pushState(null, null, `/#!${fragment}`);
+}
+
+// <Route path="/?_escaped_fragment_=*" render={() => <Redirect to="/projects" />} />
+
 
 const Status404 = () => <div>404</div>;
 
