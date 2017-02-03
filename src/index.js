@@ -11,6 +11,7 @@ import {parse as parseUrl} from 'url';
 import './css/index.css';
 
 import get from 'lodash/fp/get';
+import getOr from 'lodash/fp/getOr';
 import flowRight from 'lodash/fp/flowRight';
 import fromPairs from 'lodash/fp/fromPairs';
 import map from 'lodash/fp/map';
@@ -18,7 +19,7 @@ import split from 'lodash/fp/split';
 
 const fragment = flowRight(
   decodeURIComponent,
-  get('_escaped_fragment_'),
+  getOr('', '_escaped_fragment_'),
   fromPairs,
   map(split('=')),
   split('&'),
