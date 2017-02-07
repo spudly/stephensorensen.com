@@ -15,23 +15,23 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 }
 
 const PORT = process.env.PORT || 3000;
-const PROTOCOL = process.env.HTTPS === 'true' ? "https" : "http";
+const PROTOCOL = process.env.HTTPS === 'true' ? 'https' : 'http';
 const HOST = process.env.HOST || 'localhost';
 const compiler = setupCompiler(HOST, PORT, PROTOCOL);
 
 function setupCompiler(host, port, protocol) {
   const compiler = webpack(config);
 
-  compiler.plugin('invalid', function() { // means a file changed so the bundle is invalidated
+  compiler.plugin('invalid', () => { // means a file changed so the bundle is invalidated
     console.log('Compiling...');
   });
 
   let isFirstCompile = true;
 
   compiler.plugin('done', stats => {
-    var messages = formatWebpackMessages(stats.toJson({}, true));
-    var isSuccessful = !messages.errors.length && !messages.warnings.length;
-    var showInstructions = isSuccessful && isFirstCompile;
+    const messages = formatWebpackMessages(stats.toJson({}, true));
+    const isSuccessful = !messages.errors.length && !messages.warnings.length;
+    const showInstructions = isSuccessful && isFirstCompile;
 
     if (isSuccessful) {
       console.log(chalk.green('Compiled successfully!'));
@@ -41,7 +41,7 @@ function setupCompiler(host, port, protocol) {
       console.log();
       console.log('The app is running at:');
       console.log();
-      console.log('  ' + chalk.cyan(protocol + '://' + host + ':' + port + '/'), '\n');
+      console.log(`  ${chalk.cyan(`${protocol}://${host}:${port}/`)}`, '\n');
       console.log();
       isFirstCompile = false;
     }
@@ -62,7 +62,7 @@ function setupCompiler(host, port, protocol) {
   return compiler;
 }
 
-var devServer = new WebpackDevServer(compiler, {
+const devServer = new WebpackDevServer(compiler, {
   compress: true, // gzip
   clientLogLevel: 'info',
   contentBase: path.join(__dirname, '../static'),
@@ -72,7 +72,7 @@ var devServer = new WebpackDevServer(compiler, {
   watchOptions: {
     ignored: /node_modules/,
   },
-  https: PROTOCOL === "https",
+  https: PROTOCOL === 'https',
   host: HOST,
 });
 

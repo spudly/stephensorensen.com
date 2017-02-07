@@ -1,11 +1,11 @@
-const filesize = require('filesize');
-const chalk = require('chalk');
+import filesize from 'filesize';
+import chalk from 'chalk';
 
 const FIFTY_KILOBYTES = 1024 * 50;
 
-function getDifferenceLabel(currentSize, previousSize) {
+const getDifferenceLabel = (currentSize, previousSize) => {
   const difference = currentSize - previousSize;
-  const fileSize = !Number.isNaN(difference) ? filesize(difference) : 0;
+  const fileSize = Number.isNaN(difference) ? 0 : filesize(difference);
   if (difference >= FIFTY_KILOBYTES) {
     return chalk.red(`+${fileSize}`);
   } else if (difference < FIFTY_KILOBYTES && difference > 0) {
@@ -14,6 +14,6 @@ function getDifferenceLabel(currentSize, previousSize) {
     return chalk.green(fileSize);
   }
   return '';
-}
+};
 
-module.exports = getDifferenceLabel;
+export default getDifferenceLabel;

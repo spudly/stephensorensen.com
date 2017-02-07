@@ -3,23 +3,25 @@ process.env.NODE_ENV = 'production';
 
 import {StaticRouter} from 'react-router-dom';
 import App from '../src/widgets/App';
-const React = require('react');
-const chalk = require('chalk');
-const fs = require('fs-extra');
-const path = require('path');
-const webpack = require('webpack');
-const config = require('./webpack.config.prod');
-const pify = require('pify');
-const recursiveReadDir = pify(require('recursive-readdir'));
-const gzipSize = require('gzip-size').sync; // TODO: async version
-const {pages} = require('../data.json');
-const {renderToString, renderToStaticMarkup} = require('react-dom/server');
-const printFileSizes = require('./utils/printFileSizes');
-const removeFileNameHash = require('./utils/removeFileNameHash');
-const postcss = require('postcss');
-const autoprefixer = require('autoprefixer');
-const postcssImport = require('postcss-import');
-const cssnano = require('cssnano');
+import React from 'react';
+import chalk from 'chalk';
+import fs from 'fs-extra';
+import path from 'path';
+import webpack from 'webpack';
+import config from './webpack.config.prod';
+import pify from 'pify';
+import {sync as gzipSize} from 'gzip-size'; // TODO: use async version
+import {pages} from '../data.json';
+import {renderToString, renderToStaticMarkup} from 'react-dom/server';
+import printFileSizes from './utils/printFileSizes';
+import removeFileNameHash from './utils/removeFileNameHash';
+import postcss from 'postcss';
+import autoprefixer from 'autoprefixer';
+import postcssImport from 'postcss-import';
+import cssnano from 'cssnano';
+import _recursiveReadDir from 'recursive-readdir';
+
+const recursiveReadDir = pify(_recursiveReadDir);
 
 const BUILD = path.join(__dirname, '../build');
 const SRC = path.join(__dirname, '../src');
@@ -98,10 +100,13 @@ const buildJavaScript = async () => {
   return stats.hash;
 };
 
-const MetaHtml = ({hash, path, contentHtml, title}) => (
+const MetaHtml = ({hash, path, contentHtml, title}) =>
   <html>
     <head>
       <title>{title}</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="shortcut icon" href="/favicon.ico" />
       <link rel="stylesheet" href={`/${hash}/css`} />
     </head>
     <body>
@@ -109,7 +114,7 @@ const MetaHtml = ({hash, path, contentHtml, title}) => (
       <script src={`/${hash}/js`} />
     </body>
   </html>
-);
+;
 
 const buildPages = (hash) => Promise.all(
   Object.keys(pages).map(path => {
@@ -126,14 +131,14 @@ const buildPages = (hash) => Promise.all(
           <App />
         </StaticRouter>
       );
-      const metaElement = (
-        <MetaHtml
+      const metaElement =
+        (<MetaHtml
           path={path}
           contentHtml={contentHtml}
           title={pageData.title}
           hash={hash}
-        />
-      );
+        />)
+      ;
       const metaHtml = `<!doctype html>${renderToStaticMarkup(metaElement)}`;
       return outputFile(`${BUILD}/pages${path}.html`, metaHtml);
     } catch (error) {
@@ -153,7 +158,7 @@ const buildCss = async () => {
   const css = await readFile(`${SRC}/index.css`);
   const result = await postcss(plugins).process(css, {from: `${SRC}/index.css`, to: `${BUILD}/index.css`});
   await writeFile(`${BUILD}/index.css`, result.css);
-}
+};
 
 buildCss()
   .then(buildJavaScript)

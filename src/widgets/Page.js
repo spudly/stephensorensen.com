@@ -1,7 +1,8 @@
 import React from 'react';
 import Gravatar from 'react-gravatar';
+import flatten from 'lodash/fp/flatten';
 
-const SocialLinks = ({facebook, twitter, googleplus, medium, github, stackoverflow, linkedin, email}) => (
+const SocialLinks = ({facebook, twitter, googleplus, medium, github, stackoverflow, linkedin, email}) =>
   <ul>
     <li><a rel="me" href={`https://www.facebook.com/${facebook}`}>Facebook</a></li>
     <li><a rel="me" href={`https://twitter.com/${twitter.replace(/^@/, '')}`}>Twitter</a></li>
@@ -11,12 +12,24 @@ const SocialLinks = ({facebook, twitter, googleplus, medium, github, stackoverfl
     <li><a rel="me" href={`http://stackoverflow.com/users/${stackoverflow}`}>StackOverflow</a></li>
     <li><a rel="me" href={`https://www.linkedin.com/in/${linkedin}`}>LinkedIn</a></li>
     <li><a rel="me" className="u-email" href={`mailto:${email}`}>Email: shuoink@gmail.com</a></li>
-  </ul>
+  </ul>;
+
+const LinkList = ({items}) => (
+  <dl>
+    {flatten(items.map(item => [
+      <dt key={`${item.url}--dt`}><a href={item.url}>{item.name}</a></dt>,
+      <dd key={`${item.url}--dd`}>{item.description}</dd>
+    ]))}
+  </dl>
 );
+
+const PageHeader = ({text}) => <div className="page-header">{text}</div>;
 
 const widgets = {
   'react-gravatar': Gravatar,
   'social-links': SocialLinks,
+  'link-list': LinkList,
+  'page-header': PageHeader,
 };
 
 const toReactElement = (descriptor) => {
@@ -36,10 +49,10 @@ const toReactElement = (descriptor) => {
   );
 };
 
-const Page = ({pageData}) => (
+const Page = ({pageData}) =>
   <div className="page">
     {(pageData.children || []).map(toReactElement)}
   </div>
-);
+;
 
 export default Page;

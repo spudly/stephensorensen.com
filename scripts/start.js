@@ -1,7 +1,8 @@
-const express = require('express');
-const path = require('path');
-const {pages} = require('../data.json');
-const {hash} = require('../build/buildData.json')
+/* eslint-disable no-console */
+import express, {Router as createRouter} from 'express';
+import path from 'path';
+import {pages} from '../data.json';
+import {hash} from '../build/buildData.json';
 
 const app = express();
 
@@ -16,17 +17,13 @@ const serveJs = sendFile;
 const serveCss = sendFile;
 const serveTxt = sendFile;
 
-const serve404 = file => (req, resp) => {
-  resp.status(404).send('404');
-  //resp.status(404).sendFile(file);
-};
-const serve500 = file => (error, req, resp, next) => {
-  console.log(error);
-  resp.status(500).send('500');
-  //resp.status(500).sendFile(file);
-};
+const serve404 = file => (req, resp) =>
+  resp.status(404).sendFile(file);
 
-const router = express.Router();
+const serve500 = file => (error, req, resp, next) => // eslint-disable-line no-unused-vars, max-len
+  resp.status(500).sendFile(file);
+
+const router = createRouter();
 router.get('/', (req, resp) => resp.redirect(303, '/about'));
 router.get('/sitemap.txt', serveTxt('build/sitemap.txt'));
 router.get(`/${hash}/js`, serveJs('build/index.js'));
@@ -34,7 +31,7 @@ router.get(`/${hash}/css`, serveCss('build/index.css'));
 
 // these should be auto-generated or discovered or something...
 Object.keys(pages).forEach(
-  path => router.get(path, serveHtml(`build/pages${path}.html`))
+  pathname => router.get(pathname, serveHtml(`build/pages${pathname}.html`))
 );
 
 router.all('*', serve404('/404'));

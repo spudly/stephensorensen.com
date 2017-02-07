@@ -1,13 +1,15 @@
-const chalk = require('chalk');
-const pify = require('pify');
-const fs = require('fs-extra');
-const path = require('path');
-const gzipSize = require('gzip-size').sync; // TODO: async version
+/* eslint-disable no-console */
+import chalk from 'chalk';
+import filesize from 'filesize';
+import fs from 'fs-extra';
+import getDifferenceLabel from './getDifferenceLabel';
+import {sync as gzipSize} from 'gzip-size'; // TODO: use async versin
+import path from 'path';
+import pify from 'pify';
+import removeFileNameHash from './removeFileNameHash';
+import stripAnsi from 'strip-ansi';
+
 const readFile = pify(fs.readFile);
-const removeFileNameHash = require('./removeFileNameHash');
-const getDifferenceLabel = require('./getDifferenceLabel');
-const filesize = require('filesize');
-const stripAnsi = require('strip-ansi');
 
 const BUILD = path.join(__dirname, '../../build');
 
@@ -29,7 +31,8 @@ const printFileSizes = async (stats, previousSizeMap) => {
       })
   );
   assets.sort((a, b) => b.size - a.size);
-  const longestSizeLabelLength = Math.max.apply(null, assets.map(a => stripAnsi(a.sizeLabel).length));
+  const sizeLabelLengths = assets.map(a => stripAnsi(a.sizeLabel).length);
+  const longestSizeLabelLength = Reflect.apply(Math.max, null, sizeLabelLengths);
   assets.forEach(asset => {
     let sizeLabel = asset.sizeLabel;
     const sizeLength = stripAnsi(sizeLabel).length;
@@ -41,4 +44,4 @@ const printFileSizes = async (stats, previousSizeMap) => {
   });
 };
 
-module.exports = printFileSizes;
+export default printFileSizes;

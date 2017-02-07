@@ -24,19 +24,19 @@ class Nav extends React.Component {
           <Burger isOpen={isOpen} />
         </button>
         <ul className="nav-items">
-          {items.map(item => (
+          {items.map(item =>
             <Route
               key={item.url}
               path={item.url}
-              children={({match}) => (
+              children={({match}) =>
                 <li key={item.url} className={classnames('nav-item', {'nav-item-active': match})}>
                   <Link to={item.url} onClick={this._toggleOpen}>
                     {item.linkText}
                   </Link>
                 </li>
-              )}
+              }
             />
-          ))}
+          )}
         </ul>
       </nav>
     );
