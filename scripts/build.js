@@ -30,7 +30,6 @@ const STATIC = path.join(__dirname, '../static');
 const emptyDir = pify(fs.emptyDir);
 const copy = pify(fs.copy);
 const outputFile = pify(fs.outputFile);
-const writeFile = pify(fs.writeFile);
 const readFile = pify(fs.readFile);
 
 const printErrors = (summary, errors) => {
@@ -157,7 +156,7 @@ const buildCss = async () => {
   const plugins = [postcssImport, autoprefixer, cssnano];
   const css = await readFile(`${SRC}/index.css`);
   const result = await postcss(plugins).process(css, {from: `${SRC}/index.css`, to: `${BUILD}/index.css`});
-  await writeFile(`${BUILD}/index.css`, result.css);
+  await outputFile(`${BUILD}/index.css`, result.css);
 };
 
 buildCss()
