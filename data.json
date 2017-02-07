@@ -1,0 +1,107 @@
+{
+  "pages": {
+    "/about": {
+      "title": "#whoami",
+      "children": [
+        {
+          "id": "0",
+          "widget": "page-header",
+          "children": ["<WhoAmI />"]
+        },
+        {
+          "id": "1",
+          "widget": "react-gravatar",
+          "props": {
+            "email": "shuoink@gmail.com",
+            "size": 250,
+            "className": "u-photo"
+          }
+        },
+        {
+          "id": "2",
+          "widget": "p",
+          "children": [
+            "Hey, I'm Stephen Sorensen. I'm a JavaScript developer living in the Atlanta, GA area. I work for ",
+            {
+              "id": "3",
+              "widget": "external-link",
+                "props": {
+                  "href": "https://www.theice.com"
+                },
+                "children": [
+                  "Intercontinental Exchange, Inc."
+                ]
+              },
+              ", where I develop frontend, backend, and universal javascript components for multiple websites, including the website for the ",
+              {
+                "id": "4",
+                "widget": "external-link",
+                "props": {
+                  "href": "https://www.nyse.com"
+                },
+                "children": [
+                  "New York Stock Exchange"
+                ]
+              },
+              ". I am a member of ",
+              {
+                "id": "5",
+                "widget": "external-link",
+                "props": {
+                  "href": "https://www.mormon.org"
+                },
+                "children": [
+                  "The Church of Jesus Christ of Latter-day Saints"
+                ]
+              },
+              " (Mormon). Among other things, I'm also a husband, father, pyromaniac, cook, carpenter, gardener, camper, fisherman, and political junkie."
+            ]
+          },
+          {
+            "id": "6",
+            "widget": "p",
+            "children": ["As you can see, this page is (always) under construction."]
+          },
+          {
+            "id": "7",
+            "widget": "p",
+            "children": ["No, I'm not looking for a job, but thanks for asking."]
+          },
+          {
+            "id": "8",
+            "widget": "h2",
+            "children": ["You can find me on..."]
+          },
+          {
+            "id": "9",
+            "widget": "social-links",
+            "props": {
+              "facebook": "stephenjohnsorensen",
+              "twitter": "@shuoink",
+              "googleplus": "+StephenSorensen",
+              "medium": "@shuoink",
+              "github": "spudly",
+              "stackoverflow": "163699/spudly",
+              "linkedin": "stephensorensen",
+              "email": "shuoink@gmail.com"
+            }
+          }
+        ]
+      },
+      "/code": {
+        "title": "TODO"
+      },
+      "/experiments": {
+        "title": "TODO"
+      },
+      "/resume": {
+        "title": "TODO"
+      },
+      "/404": {
+        "title": "TODO"
+      },
+      "/500": {
+        "title": "TODO"
+      }
+  }
+}
