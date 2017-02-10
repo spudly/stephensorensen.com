@@ -12,8 +12,12 @@ const PROTOCOL = process.env.C9_HOSTNAME ? 'https' : 'http';
 const BUILD = path.resolve(__dirname, '../build');
 
 const sendFile = file => (req, resp) => resp.sendFile(file);
-const serveHtml = sendFile;
-const serveJs = sendFile;
+const serveHtml = file => (req, resp) => {
+  resp.header('Service-Worker-Allowed', '/').sendFile(file);
+};
+const serveJs = file => (req, resp) => {
+  resp.header('Service-Worker-Allowed', '/').sendFile(file);
+};
 const serveCss = sendFile;
 const serveTxt = sendFile;
 
@@ -37,6 +41,7 @@ router.get('/sitemap.txt', serveTxt(`${BUILD}/sitemap.txt`));
 router.get('/manifest.webmanifest', serveManifest(`${BUILD}/manifest.webmanifest`));
 router.get(`/${hash}/js`, serveJs(`${BUILD}/index.js`));
 router.get(`/${hash}/css`, serveCss(`${BUILD}/index.css`));
+router.get(`/${hash}/serviceWorker.js`, serveJs(`${BUILD}/serviceWorker.js`));
 router.get('/images/*', (req, resp, next) => {
   const file = `${BUILD}/images/${req.url.replace('/images/', '')}`;
   resp.sendFile(file, (error) => {

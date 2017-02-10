@@ -105,6 +105,7 @@ const MetaHtml = ({hash, path, contentHtml, title}) =>
       <title>{title}</title>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="theme-color" content="#444" />
       <link rel="shortcut icon" href="/favicon.ico" />
       <link rel="stylesheet" href={`/${hash}/css`} />
       <link rel="manifest" href="/manifest.webmanifest" />

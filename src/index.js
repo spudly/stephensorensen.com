@@ -9,3 +9,10 @@ render(
   </BrowserRouter>,
   document.querySelector('.root')
 );
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register(
+    `/${__webpack_hash__}/serviceWorker.js`,
+    {scope: '/'}
+  );
+}

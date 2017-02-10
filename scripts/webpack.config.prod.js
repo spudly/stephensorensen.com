@@ -7,7 +7,10 @@ const BUILD = path.join(__dirname, '../build');
 const config = {
   bail: true,
   devtool: 'source-map',
-  entry: `${SRC}/index.js`,
+  entry: {
+    index: `${SRC}/index.js`,
+    serviceWorker: `${SRC}/serviceWorker.js`,
+  },
   module: {
     loaders: [
       {
@@ -30,7 +33,7 @@ const config = {
     // ],
   },
   output: {
-    filename: 'index.js',
+    filename: '[name].js',
     path: BUILD,
   },
   plugins: [
@@ -39,8 +42,8 @@ const config = {
         NODE_ENV: '"production"',
       },
     }),
+    new webpack.ExtendedAPIPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
       compress: {
