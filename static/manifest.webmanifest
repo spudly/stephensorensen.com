@@ -1,0 +1,42 @@
+{
+  "background_color": "#ccc",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/images/logo.svg",
+      "sizes": "16x16 32x32 64x64 128x128 256x256 512x512"
+    },
+    {
+      "src": "/images/logo16.png",
+      "sizes": "16x16"
+    },
+    {
+      "src": "/images/logo32.png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "/images/logo64.png",
+      "sizes": "64x64"
+    },
+    {
+      "src": "/images/logo128.png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "/images/logo256.png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "/images/logo512.png",
+      "sizes": "512x512"
+    }
+  ],
+  "lang": "en-US",
+  "name": "Stephen John Sorensen",
+  "description": "Stephen Sorensen's Personal Website",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Stephen",
+  "start_url": "/",
+  "theme_color": "#ccc",
+}

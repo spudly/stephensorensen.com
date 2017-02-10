@@ -9,33 +9,54 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 const HOST = process.env.C9_HOSTNAME || process.env.HOST || 'localhost';
 const PROTOCOL = process.env.C9_HOSTNAME ? 'https' : 'http';
+const BUILD = path.resolve(__dirname, '../build');
 
-
-const sendFile = file => (req, resp) => resp.sendFile(path.resolve(__dirname, '..', file));
+const sendFile = file => (req, resp) => resp.sendFile(file);
 const serveHtml = sendFile;
 const serveJs = sendFile;
 const serveCss = sendFile;
 const serveTxt = sendFile;
 
-const serve404 = file => (req, resp) =>
-  resp.status(404).sendFile(file);
+const serveManifest = file => (req, resp) =>
+  resp
+    .type('application/manifest+json')
+    .sendFile(file);
 
-const serve500 = file => (error, req, resp, next) => // eslint-disable-line no-unused-vars, max-len
+const serve404 = file => (req, resp) => {
+  resp.status(404).sendFile(file);
+};
+
+const serve500 = file => (error, req, resp, next) => {// eslint-disable-line no-unused-vars, max-len
+  console.error(error);
   resp.status(500).sendFile(file);
+};
 
 const router = createRouter();
 router.get('/', (req, resp) => resp.redirect(303, '/about'));
-router.get('/sitemap.txt', serveTxt('build/sitemap.txt'));
-router.get(`/${hash}/js`, serveJs('build/index.js'));
-router.get(`/${hash}/css`, serveCss('build/index.css'));
+router.get('/sitemap.txt', serveTxt(`${BUILD}/sitemap.txt`));
+router.get('/manifest.webmanifest', serveManifest(`${BUILD}/manifest.webmanifest`));
+router.get(`/${hash}/js`, serveJs(`${BUILD}/index.js`));
+router.get(`/${hash}/css`, serveCss(`${BUILD}/index.css`));
+router.get('/images/*', (req, resp, next) => {
+  const file = `${BUILD}/images/${req.url.replace('/images/', '')}`;
+  resp.sendFile(file, (error) => {
+    if (error) {
+      console.log(error);
+      if (error.code === 'ENOENT') {
+        next(); // 404
+      } else {
+        next(error); // 500
+      }
+    }
+  });
+});
 
-// these should be auto-generated or discovered or something...
 Object.keys(pages).forEach(
-  pathname => router.get(pathname, serveHtml(`build/pages${pathname}.html`))
+  pathname => router.get(pathname, serveHtml(`${BUILD}/pages${pathname}.html`))
 );
 
-router.all('*', serve404('/404'));
+router.all('*', serve404(`${BUILD}/pages/404.html`));
 
 app.use(router);
-app.use(serve500('/500'));
+app.use(serve500(`${BUILD}/pages/500.html`));
 app.listen(PORT, () => console.log(`Listening on ${PROTOCOL}://${HOST}:${PORT}/`));

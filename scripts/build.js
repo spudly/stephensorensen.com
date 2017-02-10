@@ -107,6 +107,8 @@ const MetaHtml = ({hash, path, contentHtml, title}) =>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="shortcut icon" href="/favicon.ico" />
       <link rel="stylesheet" href={`/${hash}/css`} />
+      <link rel="manifest" href="/manifest.webmanifest" />
+      <link rel="icon" type="image/png" href="/images/logo32.png" />
     </head>
     <body>
       <div className="root" dangerouslySetInnerHTML={{__html: contentHtml}} />
