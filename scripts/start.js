@@ -6,19 +6,31 @@ import {hash} from '../build/buildData.json';
 
 const app = express();
 
+app.disable('x-powered-by');
+
 const PORT = process.env.PORT || 8080;
 const HOST = process.env.C9_HOSTNAME || process.env.HOST || 'localhost';
 const PROTOCOL = process.env.C9_HOSTNAME ? 'https' : 'http';
 const BUILD = path.resolve(__dirname, '../build');
 
+const cacheForever = (req, resp, next) => {
+  resp.header('Cache-Control', 'public, max-age=31536000, immutable');
+  resp.header('Expires', new Date(Date.now() + 31536000000).toUTCString());
+  next();
+};
+
 const sendFile = file => (req, resp) => resp.sendFile(file);
+
 const serveHtml = file => (req, resp) => {
   resp.header('Service-Worker-Allowed', '/').sendFile(file);
 };
+
 const serveJs = file => (req, resp) => {
   resp.header('Service-Worker-Allowed', '/').sendFile(file);
 };
+
 const serveCss = sendFile;
+
 const serveTxt = sendFile;
 
 const serveManifest = file => (req, resp) =>
@@ -35,8 +47,11 @@ const serve500 = file => (error, req, resp, next) => {// eslint-disable-line no-
   resp.status(500).sendFile(file);
 };
 
+const redirect = (page, status = 301) => (req, resp) => resp.redirect(status, page);
+
 const router = createRouter();
-router.get('/', (req, resp) => resp.redirect(303, '/about'));
+router.use(`/${hash}`, cacheForever);
+router.get('/', redirect('/about', 303));
 router.get('/sitemap.txt', serveTxt(`${BUILD}/sitemap.txt`));
 router.get('/manifest.webmanifest', serveManifest(`${BUILD}/manifest.webmanifest`));
 router.get(`/${hash}/js`, serveJs(`${BUILD}/index.js`));

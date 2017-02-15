@@ -43,7 +43,7 @@
   },
   "scripts": {
     "dev": "babel-node scripts/dev.js",
-    "start": "babel-node scripts/start.js",
+    "start": "NODE_ENV=production babel-node scripts/start.js",
     "build": "babel-node scripts/build.js",
     "test": "jest",
     "lint": "eslint src scripts"
