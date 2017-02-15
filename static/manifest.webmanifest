@@ -4,31 +4,38 @@
   "icons": [
     {
       "src": "/images/logo.svg",
-      "sizes": "16x16 32x32 64x64 128x128 256x256 512x512"
+      "sizes": "16x16 32x32 64x64 128x128 256x256 512x512",
+      "type": "image/svg+xml"
     },
     {
       "src": "/images/logo16.png",
-      "sizes": "16x16"
+      "sizes": "16x16",
+      "type": "image/png"
     },
     {
       "src": "/images/logo32.png",
-      "sizes": "32x32"
+      "sizes": "32x32",
+      "type": "image/png"
     },
     {
       "src": "/images/logo64.png",
-      "sizes": "64x64"
+      "sizes": "64x64",
+      "type": "image/png"
     },
     {
       "src": "/images/logo128.png",
-      "sizes": "128x128"
+      "sizes": "128x128",
+      "type": "image/png"
     },
     {
       "src": "/images/logo256.png",
-      "sizes": "256x256"
+      "sizes": "256x256",
+      "type": "image/png"
     },
     {
       "src": "/images/logo512.png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
   "lang": "en-US",

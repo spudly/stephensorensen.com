@@ -1,30 +1,24 @@
 /* global caches, fetch, Response */
 import regeneratorRuntime from 'regenerator-runtime';
-const urlsToCache = [];
 const CACHE_KEY = __webpack_hash__;
 const OFFLINE_PAGE = {}; // TODO: define this
 const OFFLINE_IMAGE = {}; // TODO: define this
-
-const openCache = async () => {
-  const cache = await caches.open(CACHE_KEY);
-  return cache.addAll(urlsToCache);
-};
+const CACHE_URLS = [
+  '/',
+  '/about',
+  '/code',
+  '/experiments',
+  '/resume',
+  `/${CACHE_KEY}/js`,
+  `/${CACHE_KEY}/css`,
+];
 
 const fetchFromCache = async request => {
   const response = await caches.match(request);
   if (!response) {
-    throw Error('${event.request.url} not found in cache');
+    throw Error(`${event.request.url} not found in cache`);
   }
   return response;
-};
-
-const addToCache = async (cacheKey, request, response) => {
-  if (response.ok) {
-    var copy = response.clone();
-    const cache = await caches.open(cacheKey);
-    cache.put(request, copy);
-    return response;
-  }
 };
 
 const offlineResponse = resourceType => {
@@ -42,8 +36,15 @@ const offlineResponse = resourceType => {
 }
 
 const fetchAndCache = async request => {
-  const response = await fetch(request);
-  return addToCache(CACHE_KEY, request, response);
+  const {pathname} = new URL(request.url);
+  const response = await fetch(pathname, {credentials: 'same-origin'});
+  if (response.ok) {
+    const clone = response.clone();
+    const cache = await caches.open(CACHE_KEY);
+    cache.put(request, clone);
+    return response;
+  }
+  return response;
 };
 
 const respondFromCacheThenNetwork = async request => {
@@ -70,15 +71,42 @@ const respondFromNetworkThenCache = async request => {
   }
 };
 
-const handleInstall = event => event.waitUntil(openCache());
+const shouldHandleFetch = request => {
+  const {origin, pathname} = new URL(request.url);
+
+  if (pathname.endsWith('/serviceWorker.js')) {
+    return false;
+  }
+
+  if (request.method !== 'GET') {
+    return false;
+  }
+
+  if (origin !== self.location.origin) {
+    return false;
+  }
+
+  return true;
+};
+
+const populateCache = async () => {
+  const cache = await caches.open(CACHE_KEY);
+  return cache.addAll(CACHE_URLS);
+};
+
+
+const handleInstall = event => event.waitUntil(populateCache());
 
 const handleFetch = event => {
   const isImmutableFile = event.request.url.startsWith(`/${CACHE_KEY}/`);
-  event.respondWith(
-    isImmutableFile
-      ? respondFromCacheThenNetwork(event.request)
-      : respondFromNetworkThenCache(event.request)
-  )
+  if (shouldHandleFetch(event.request)) {
+    console.log(`handling fetch for ${event.request.url}`);
+    event.respondWith(
+      isImmutableFile
+        ? respondFromCacheThenNetwork(event.request)
+        : respondFromNetworkThenCache(event.request)
+    )
+  }
 };
 
 const handleActivate = async event => {

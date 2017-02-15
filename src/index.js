@@ -12,7 +12,7 @@ render(
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register(
-    `/${__webpack_hash__}/serviceWorker.js`,
+    `/serviceWorker.js`,
     {scope: '/'}
   );
 }
