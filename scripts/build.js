@@ -18,7 +18,7 @@ import removeFileNameHash from './utils/removeFileNameHash';
 import postcss from 'postcss';
 import autoprefixer from 'autoprefixer';
 import postcssImport from 'postcss-import';
-import cssnano from 'cssnano';
+// import cssnano from 'cssnano';
 import _recursiveReadDir from 'recursive-readdir';
 
 const recursiveReadDir = pify(_recursiveReadDir);
@@ -156,7 +156,7 @@ const writeBuildData = ({hash}) => outputFile(
 );
 
 const buildCss = async () => {
-  const plugins = [postcssImport, autoprefixer, cssnano];
+  const plugins = [postcssImport, autoprefixer/*, cssnano*/];
   const css = await readFile(`${SRC}/index.css`);
   const result = await postcss(plugins).process(css, {from: `${SRC}/index.css`, to: `${BUILD}/index.css`});
   await outputFile(`${BUILD}/index.css`, result.css);

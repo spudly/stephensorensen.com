@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import Gravatar from 'react-gravatar';
 import flatten from 'lodash/fp/flatten';
 
@@ -49,10 +49,18 @@ const toReactElement = (descriptor) => {
   );
 };
 
-const Page = ({pageData}) =>
-  <div className="page">
-    {(pageData.children || []).map(toReactElement)}
-  </div>
-;
+const Page = ({pageData}) => {
+  return (
+    <div className="page">
+      {(pageData.children || []).map(toReactElement)}
+    </div>
+  );
+};
+
+Page.displayName = 'Page';
+
+Page.propTypes = {
+  children: PropTypes.array.isRequired,
+};
 
 export default Page;

@@ -20,7 +20,7 @@ const App = ({children}) =>
         <Route
           key={path}
           path={path}
-          component={Page}
+          render={() => <Page pageData={pages[path]} />}
           pageData={pages[path]}
         />
       )}
