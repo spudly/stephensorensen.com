@@ -7,12 +7,9 @@ render(
   <BrowserRouter>
     <App />
   </BrowserRouter>,
-  document.querySelector('.root')
+  document.querySelector('.root'),
 );
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register(
-    `/serviceWorker.js`,
-    {scope: '/'}
-  );
+  navigator.serviceWorker.register('/serviceWorker.js', {scope: '/'});
 }

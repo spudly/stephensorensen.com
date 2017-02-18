@@ -2,7 +2,7 @@
   "name": "@spudly/stephensorensen.com",
   "private": true,
   "devDependencies": {
-    "@spudly/eslint-config": "^4.0.0",
+    "@spudly/eslint-config": "^4.0.3",
     "autoprefixer": "^6.7.2",
     "babel-cli": "^6.22.2",
     "babel-loader": "^6.2.10",
@@ -19,6 +19,7 @@
     "jest": "^18.1.0",
     "path-exists": "^3.0.0",
     "pify": "^2.3.0",
+    "postcss": "^5.2.14",
     "postcss-cli": "^2.6.0",
     "postcss-import": "^9.1.0",
     "react-dev-utils": "^0.5.0",
@@ -43,7 +44,7 @@
   "scripts": {
     "dev": "babel-node scripts/dev.js",
     "start": "NODE_ENV=production babel-node scripts/start.js",
-    "build": "babel-node scripts/build.js",
+    "build": "NODE_ENV=production babel-node scripts/build.js",
     "test": "jest",
     "lint": "eslint src scripts"
   },

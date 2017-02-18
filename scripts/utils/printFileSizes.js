@@ -15,8 +15,9 @@ const BUILD = path.join(__dirname, '../../build');
 
 const printFileSizes = async (stats, previousSizeMap) => {
   const assets = await Promise.all(
-    stats.toJson().assets
-      .filter(asset => /\.js$/.test(asset.name))
+    stats
+      .toJson()
+      .assets.filter(asset => /\.js$/.test(asset.name))
       .map(async asset => {
         const fileContents = await readFile(`${BUILD}/${asset.name}`);
         const size = gzipSize(fileContents);
@@ -28,19 +29,27 @@ const printFileSizes = async (stats, previousSizeMap) => {
           size,
           sizeLabel: filesize(size) + (difference ? ` (${difference})` : ''),
         };
-      })
+      }),
   );
   assets.sort((a, b) => b.size - a.size);
   const sizeLabelLengths = assets.map(a => stripAnsi(a.sizeLabel).length);
-  const longestSizeLabelLength = Reflect.apply(Math.max, null, sizeLabelLengths);
+  const longestSizeLabelLength = Reflect.apply(
+    Math.max,
+    null,
+    sizeLabelLengths,
+  );
   assets.forEach(asset => {
-    let sizeLabel = asset.sizeLabel;
+    let {sizeLabel} = asset;
     const sizeLength = stripAnsi(sizeLabel).length;
     if (sizeLength < longestSizeLabelLength) {
       const rightPadding = ' '.repeat(longestSizeLabelLength - sizeLength);
       sizeLabel += rightPadding;
     }
-    console.log(`  ${sizeLabel}  ${chalk.dim(asset.folder + path.sep)}${chalk.cyan(asset.name)}`);
+    console.log(
+      `  ${sizeLabel}  ${chalk.dim(asset.folder + path.sep)}${chalk.cyan(
+        asset.name,
+      )}`,
+    );
   });
 };
 

@@ -1,3 +1,4 @@
+/* eslint-disable */ // until I'm ready to work on this file
 process.env.NODE_ENV = 'development';
 
 const path = require('path');
@@ -22,7 +23,8 @@ const compiler = setupCompiler(HOST, PORT, PROTOCOL);
 function setupCompiler(host, port, protocol) {
   const compiler = webpack(config);
 
-  compiler.plugin('invalid', () => { // means a file changed so the bundle is invalidated
+  compiler.plugin('invalid', () => {
+    // means a file changed so the bundle is invalidated
     console.log('Compiling...');
   });
 

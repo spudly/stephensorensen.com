@@ -1,5 +1,10 @@
-/* global caches, fetch, Response */
+/* global caches, fetch, Response, __webpack_hash__ */
+
+// TODO: figure out why I even need this...
+// eslint-disable-next-line no-unused-vars
 import regeneratorRuntime from 'regenerator-runtime';
+
+// eslint-disable-next-line camelcase
 const CACHE_KEY = __webpack_hash__;
 const OFFLINE_PAGE = {}; // TODO: define this
 const OFFLINE_IMAGE = {}; // TODO: define this
@@ -32,8 +37,8 @@ const offlineResponse = resourceType => {
     return caches.match(OFFLINE_PAGE);
   }
 
-  return undefined;
-}
+  return null;
+};
 
 const fetchAndCache = async request => {
   const {pathname} = new URL(request.url);
@@ -49,10 +54,10 @@ const fetchAndCache = async request => {
 
 const respondFromCacheThenNetwork = async request => {
   try {
-    return fetchFromCache(request);
+    return await fetchFromCache(request);
   } catch (cacheError) {
     try {
-      return fetchAndCache(request);
+      return await fetchAndCache(request);
     } catch (fetchError) {
       return offlineResponse();
     }
@@ -61,10 +66,10 @@ const respondFromCacheThenNetwork = async request => {
 
 const respondFromNetworkThenCache = async request => {
   try {
-    return fetchAndCache(request);
+    return await fetchAndCache(request);
   } catch (fetchError) {
     try {
-      return fetchFromCache(request);
+      return await fetchFromCache(request);
     } catch (cacheError) {
       return offlineResponse();
     }
@@ -94,22 +99,20 @@ const populateCache = async () => {
   return cache.addAll(CACHE_URLS);
 };
 
-
 const handleInstall = event => event.waitUntil(populateCache());
 
 const handleFetch = event => {
   const isImmutableFile = event.request.url.startsWith(`/${CACHE_KEY}/`);
   if (shouldHandleFetch(event.request)) {
-    console.log(`handling fetch for ${event.request.url}`);
     event.respondWith(
       isImmutableFile
         ? respondFromCacheThenNetwork(event.request)
-        : respondFromNetworkThenCache(event.request)
-    )
+        : respondFromNetworkThenCache(event.request),
+    );
   }
 };
 
-const handleActivate = async event => {
+const handleActivate = async () => {
   const cacheKeys = await caches.keys();
   const oldKeys = cacheKeys.filter(key => key !== CACHE_KEY);
   return Promise.all(oldKeys.map(key => caches.delete(key)));

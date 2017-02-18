@@ -3,17 +3,17 @@
     "/about": {
       "title": "#whoami",
       "nav": true,
-      "children": [
+      "childWidgets": [
         {
           "id": "0",
-          "widget": "page-header",
+          "widgetType": "page-header",
           "props": {
             "text": "<WhoAmI />"
           }
         },
         {
           "id": "1",
-          "widget": "react-gravatar",
+          "widgetType": "react-gravatar",
           "props": {
             "email": "shuoink@gmail.com",
             "size": 250,
@@ -22,38 +22,38 @@
         },
         {
           "id": "2",
-          "widget": "p",
-          "children": [
+          "widgetType": "p",
+          "childWidgets": [
             "Hey, I'm Stephen Sorensen. I'm a JavaScript developer living in the Atlanta, GA area. I work for ",
             {
               "id": "3",
-              "widget": "external-link",
+              "widgetType": "external-link",
               "props": {
                 "href": "https://www.theice.com"
               },
-              "children": [
+              "childWidgets": [
                 "Intercontinental Exchange, Inc."
               ]
             },
             ", where I develop frontend, backend, and universal javascript components for multiple websites, including the website for the ",
             {
               "id": "4",
-              "widget": "external-link",
+              "widgetType": "external-link",
               "props": {
                 "href": "https://www.nyse.com"
               },
-              "children": [
+              "childWidgets": [
                 "New York Stock Exchange"
               ]
             },
             ". I am a member of ",
             {
               "id": "5",
-              "widget": "external-link",
+              "widgetType": "external-link",
               "props": {
                 "href": "https://www.mormon.org"
               },
-              "children": [
+              "childWidgets": [
                 "The Church of Jesus Christ of Latter-day Saints"
               ]
             },
@@ -62,31 +62,33 @@
         },
         {
           "id": "6",
-          "widget": "p",
-          "children": ["As you can see, this page is (always) under construction."]
+          "widgetType": "p",
+          "childWidgets": ["As you can see, this page is (always) under construction."]
         },
         {
           "id": "7",
-          "widget": "p",
-          "children": ["No, I'm not looking for a job, but thanks for asking."]
+          "widgetType": "p",
+          "childWidgets": ["No, I'm not looking for a job, but thanks for asking."]
         },
         {
           "id": "8",
-          "widget": "h2",
-          "children": ["You can find me on..."]
+          "widgetType": "h2",
+          "childWidgets": ["You can find me on..."]
         },
         {
           "id": "9",
-          "widget": "social-links",
+          "widgetType": "social-links",
           "props": {
-            "facebook": "stephenjohnsorensen",
-            "twitter": "@shuoink",
-            "googleplus": "+StephenSorensen",
-            "medium": "@shuoink",
-            "github": "spudly",
-            "stackoverflow": "163699/spudly",
-            "linkedin": "stephensorensen",
-            "email": "shuoink@gmail.com"
+            "links": [
+              {"type": "facebook", "value": "stephenjohnsorensen"},
+              {"type": "twitter", "value": "@shuoink"},
+              {"type": "googleplus", "value": "+StephenSorensen"},
+              {"type": "medium", "value": "@shuoink"},
+              {"type": "github", "value": "spudly"},
+              {"type": "stackoverflow", "value": "163699/spudly"},
+              {"type": "linkedin", "value": "stephensorensen"},
+              {"type": "email", "value": "shuoink@gmail.com"},
+            ]
           }
         }
       ]
@@ -94,22 +96,22 @@
     "/code": {
       "title": "#code",
       "nav": true,
-      "children": [
+      "childWidgets": [
         {
           "id": "10",
-          "widget": "page-header",
+          "widgetType": "page-header",
           "props": {
             "text": "<Code />"
           }
         },
         {
           "id": "11",
-          "widget": "h2",
-          "children": ["npm packages"]
+          "widgetType": "h2",
+          "childWidgets": ["npm packages"]
         },
         {
           "id": "12",
-          "widget": "link-list",
+          "widgetType": "link-list",
           "props": {
             "items": [
               {"url": "https://www.npmjs.com/package/error-subclass", "name": "error-subclass", "description": "A base class for creating custom JavaScript error classes"},
@@ -127,10 +129,10 @@
     "/experiments": {
       "title": "#experiments",
       "nav": true,
-      "children": [
+      "childWidgets": [
         {
           "id": "10",
-          "widget": "page-header",
+          "widgetType": "page-header",
           "props": {
             "text": "<Experiments />"
           }
@@ -140,10 +142,10 @@
     "/resume": {
       "title": "#resume",
       "nav": true,
-      "children": [
+      "childWidgets": [
         {
           "id": "10",
-          "widget": "page-header",
+          "widgetType": "page-header",
           "props": {
             "text": "<Resume />"
           }
@@ -152,10 +154,10 @@
     },
     "/404": {
       "title": "#404",
-      "children": [
+      "childWidgets": [
         {
           "id": "10",
-          "widget": "page-header",
+          "widgetType": "page-header",
           "props": {
             "text": "<404 />"
           }
@@ -164,10 +166,10 @@
     },
     "/500": {
       "title": "#500",
-      "children": [
+      "childWidgets": [
         {
           "id": "10",
-          "widget": "page-header",
+          "widgetType": "page-header",
           "props": {
             "text": "<500 />"
           }

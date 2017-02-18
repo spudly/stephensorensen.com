@@ -45,7 +45,6 @@ const config = {
     new webpack.ExtendedAPIPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
       compress: {
         screw_ie8: true,
         warnings: true,
@@ -57,6 +56,7 @@ const config = {
         comments: false,
         screw_ie8: true,
       },
+      sourceMap: true,
     }),
   ],
 };

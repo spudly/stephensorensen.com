@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import classnames from 'classnames';
 
 const Burger = ({isOpen}) =>
@@ -7,7 +7,12 @@ const Burger = ({isOpen}) =>
     <span />
     <span />
     <span />
-  </div>
-;
+  </div>;
+
+Burger.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+};
+
+Burger.displayName = 'Burger';
 
 export default Burger;
