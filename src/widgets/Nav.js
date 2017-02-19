@@ -15,8 +15,12 @@ class Nav extends React.Component {
   };
 
   state = {
-    isOpen: false,
+    isOpen: true,
   };
+
+  componentDidMount() {
+    this.setState({isOpen: false});
+  }
 
   render() {
     const {items} = this.props;
