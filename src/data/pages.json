@@ -1,0 +1,158 @@
+[
+  {
+    "pathname": "/about",
+    "title": "#whoami",
+    "showInNavMenu": true,
+    "showInSiteMap": true,
+    "childWidgets": [
+      {
+        "id": "0",
+        "widgetType": "PageHeader",
+        "props": {
+          "text": "<WhoAmI />"
+        }
+      },
+      {
+        "id": "1",
+        "widgetType": "Gravatar",
+        "props": {
+          "email": "shuoink@gmail.com",
+          "size": 250,
+          "className": "u-photo"
+        }
+      },
+      {
+        "id": "2",
+        "widgetType": "p",
+        "childWidgets": [
+          "Hey, I'm Stephen Sorensen. I'm a JavaScript developer living in the Atlanta, GA area. I work for ",
+          {
+            "id": "3",
+            "widgetType": "external-link",
+            "props": {
+              "href": "https://www.theice.com"
+            },
+            "childWidgets": [
+              "Intercontinental Exchange, Inc."
+            ]
+          },
+          ", where I develop frontend, backend, and universal javascript components for multiple websites, including the website for the ",
+          {
+            "id": "4",
+            "widgetType": "external-link",
+            "props": {
+              "href": "https://www.nyse.com"
+            },
+            "childWidgets": [
+              "New York Stock Exchange"
+            ]
+          },
+          ". I am a member of ",
+          {
+            "id": "5",
+            "widgetType": "external-link",
+            "props": {
+              "href": "https://www.mormon.org"
+            },
+            "childWidgets": [
+              "The Church of Jesus Christ of Latter-day Saints"
+            ]
+          },
+          " (Mormon). Among other things, I'm also a husband, father, pyromaniac, cook, carpenter, gardener, camper, fisherman, and political junkie."
+        ]
+      },
+      {
+        "id": "6",
+        "widgetType": "p",
+        "childWidgets": ["As you can see, this page is (always) under construction."]
+      },
+      {
+        "id": "7",
+        "widgetType": "p",
+        "childWidgets": ["No, I'm not looking for a job, but thanks for asking."]
+      },
+      {
+        "id": "8",
+        "widgetType": "h2",
+        "childWidgets": ["You can find me on..."]
+      },
+      {
+        "id": "9",
+        "widgetType": "SocialLinks",
+        "props": {
+          "links": [
+            {"type": "facebook", "value": "stephenjohnsorensen"},
+            {"type": "twitter", "value": "@shuoink"},
+            {"type": "googleplus", "value": "+StephenSorensen"},
+            {"type": "medium", "value": "@shuoink"},
+            {"type": "github", "value": "spudly"},
+            {"type": "stackoverflow", "value": "163699/spudly"},
+            {"type": "linkedin", "value": "stephensorensen"},
+            {"type": "email", "value": "shuoink@gmail.com"}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "pathname": "/code",
+    "title": "#code",
+    "showInNavMenu": true,
+    "showInSiteMap": true,
+    "childWidgets": [
+      {
+        "id": "10",
+        "widgetType": "PageHeader",
+        "props": {
+          "text": "<Code />"
+        }
+      },
+      {
+        "id": "11",
+        "widgetType": "h2",
+        "childWidgets": ["npm packages"]
+      },
+      {
+        "id": "12",
+        "widgetType": "LinkList",
+        "props": {
+          "items": [
+            {"url": "https://www.npmjs.com/package/error-subclass", "name": "error-subclass", "description": "A base class for creating custom JavaScript error classes"},
+            {"url": "https://www.npmjs.com/package/@spudly/eslint-config", "name": "@spudly/eslint-config", "description": "Shareable ESLint config with all the best settings."},
+            {"url": "https://www.npmjs.com/package/talk-like-a-pirate", "name": "talk-like-a-pirate", "description": "Translates text into pirate-speek"},
+            {"url": "https://www.npmjs.com/package/card.css", "name": "card.css", "description": "CSS for a flippable card"},
+            {"url": "https://www.npmjs.com/package/index-card.css", "name": "index-card.css", "description": "CSS for an index card"},
+            {"url": "https://www.npmjs.com/package/react-deck", "name": "react-deck", "description": "Render a stack of cards with React"},
+            {"url": "https://www.npmjs.com/package/error-wrapper", "name": "error-wrapper", "description": "A base class for creating custom JavaScript error classes that wrap around a child error object."}
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "pathname": "/404",
+    "title": "#404",
+    "childWidgets": [
+      {
+        "id": "10",
+        "widgetType": "PageHeader",
+        "props": {
+          "text": "<404 />"
+        }
+      }
+    ]
+  },
+  {
+    "pathname": "/500",
+    "title": "#500",
+    "childWidgets": [
+      {
+        "id": "10",
+        "widgetType": "PageHeader",
+        "props": {
+          "text": "<500 />"
+        }
+      }
+    ]
+  }
+]

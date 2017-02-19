@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@spudly/eslint-config@^4.0.3":
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/@spudly/eslint-config/-/eslint-config-4.0.3.tgz#41bb8eb1f1f17e189a0f2621a8d4e073733d5c0b"
+"@spudly/eslint-config@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@spudly/eslint-config/-/eslint-config-5.0.0.tgz#8618de83388b82b5f3b49e3b7a09f7ddac1da1fd"
   dependencies:
     babel-eslint "^7.0.0"
     eslint "^3.15.0"
@@ -583,6 +583,13 @@ babel-plugin-transform-decorators@^6.22.0:
     babel-runtime "^6.22.0"
     babel-template "^6.22.0"
     babel-types "^6.22.0"
+
+babel-plugin-transform-define@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-define/-/babel-plugin-transform-define-1.2.0.tgz#f036bda05162f29a542e434f585da1ccf1e7ec6a"
+  dependencies:
+    lodash.get "4.4.2"
+    traverse "0.6.6"
 
 babel-plugin-transform-es2015-arrow-functions@^6.3.13:
   version "6.22.0"
@@ -3264,7 +3271,7 @@ lodash.cond@^4.3.0:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
 
-lodash.get@^4.3.0, lodash.get@^4.4.2:
+lodash.get@4.4.2, lodash.get@^4.3.0, lodash.get@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
 
@@ -4716,6 +4723,10 @@ tr46@~0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
 
+traverse@0.6.6:
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
+
 trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
@@ -4839,7 +4850,7 @@ uuid@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
 
-uuid@^3.0.0:
+uuid@^3.0.0, uuid@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.0.1.tgz#6544bba2dfda8c1cf17e629a3a305e2bb1fee6c1"
 

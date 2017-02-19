@@ -2,10 +2,11 @@
   "name": "@spudly/stephensorensen.com",
   "private": true,
   "devDependencies": {
-    "@spudly/eslint-config": "^4.0.3",
+    "@spudly/eslint-config": "^5.0.0",
     "autoprefixer": "^6.7.2",
     "babel-cli": "^6.22.2",
     "babel-loader": "^6.2.10",
+    "babel-plugin-transform-define": "^1.2.0",
     "babel-preset-env": "^1.1.8",
     "babel-preset-react": "^6.22.0",
     "babel-preset-stage-2": "^6.22.0",
@@ -39,11 +40,12 @@
     "react-dom": "^15.4.2",
     "react-gravatar": "^2.6.1",
     "react-router-dom": "^4.0.0-beta.4",
-    "regenerator-runtime": "^0.10.1"
+    "regenerator-runtime": "^0.10.1",
+    "uuid": "^3.0.1"
   },
   "scripts": {
     "dev": "babel-node scripts/dev.js",
-    "start": "NODE_ENV=production babel-node scripts/start.js",
+    "start": "NODE_ENV=production node build/index.server.js",
     "build": "NODE_ENV=production babel-node scripts/build.js",
     "test": "jest",
     "lint": "eslint src scripts"
@@ -58,13 +60,17 @@
         "env",
         {
           "targets": {
-            "browsers": [
-              "last 2 versions"
-            ]
+            "node": 7
           }
         }
       ],
       "stage-2"
+    ],
+    "plugins": [
+      [
+        "transform-define",
+        "./scripts/utils/transformDefine.js"
+      ]
     ]
   },
   "now": {

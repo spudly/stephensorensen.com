@@ -1,5 +1,5 @@
 import React from 'react';
-import widgets from '../widgets';
+import * as widgets from '../widgets';
 
 // eslint-disable-next-line react/display-name
 const buildWidget = widgetDescriptor => {
@@ -12,7 +12,7 @@ const buildWidget = widgetDescriptor => {
 
   return (
     <WidgetComponent key={id} {...props}>
-      {(childWidgets || []).map(buildWidget)}
+      {childWidgets && childWidgets.map(buildWidget)}
     </WidgetComponent>
   );
 };

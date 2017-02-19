@@ -16,11 +16,13 @@ const SocialLinks = (
     <li>
       <a rel="me" href={`https://www.facebook.com/${facebook}`}>Facebook</a>
     </li>
-    <li>
-      <a rel="me" href={`https://twitter.com/${twitter.replace(/^@/, '')}`}>
-        Twitter
-      </a>
-    </li>
+    {twitter &&
+      <li>
+        <a rel="me" href={`https://twitter.com/${twitter.replace(/^@/, '')}`}>
+          Twitter
+        </a>
+      </li>
+    }
     <li>
       <a rel="me" href={`https://plus.google.com/${googleplus}`}>Google+</a>
     </li>

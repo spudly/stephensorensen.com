@@ -1,11 +1,4 @@
-import LinkList from './LinkList';
-import PageHeader from './PageHeader';
-import Gravatar from 'react-gravatar';
-import SocialLinks from './SocialLinks';
-
-export default {
-  'link-list': LinkList,
-  'page-header': PageHeader,
-  'react-gravatar': Gravatar,
-  'social-links': SocialLinks,
-};
+export {default as LinkList} from './LinkList';
+export {default as PageHeader} from './PageHeader';
+export {default as Gravatar} from 'react-gravatar';
+export {default as SocialLinks} from './SocialLinks';

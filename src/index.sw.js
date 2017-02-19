@@ -1,19 +1,17 @@
-/* global caches, fetch, Response, __webpack_hash__ */
+/* global caches, fetch, Response */
 
 // TODO: figure out why I even need this...
 // eslint-disable-next-line no-unused-vars
 import regeneratorRuntime from 'regenerator-runtime';
 
 // eslint-disable-next-line camelcase
-const CACHE_KEY = __webpack_hash__;
+const CACHE_KEY = process.env.BUILD_ID;
 const OFFLINE_PAGE = {}; // TODO: define this
 const OFFLINE_IMAGE = {}; // TODO: define this
 const CACHE_URLS = [
   '/',
   '/about',
   '/code',
-  '/experiments',
-  '/resume',
   `/${CACHE_KEY}/js`,
   `/${CACHE_KEY}/css`,
 ];
@@ -79,7 +77,7 @@ const respondFromNetworkThenCache = async request => {
 const shouldHandleFetch = request => {
   const {origin, pathname} = new URL(request.url);
 
-  if (pathname.endsWith('/serviceWorker.js')) {
+  if (pathname === '/sw') {
     return false;
   }
 

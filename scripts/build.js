@@ -1,47 +1,32 @@
 /* eslint-disable no-console */
 import fs from 'fs-extra';
-import path from 'path';
 import pify from 'pify';
 import buildCss from './utils/buildCss';
-import buildJs from './utils/buildJs';
+import buildClientJs from './utils/buildClientJs';
+import buildServerJs from './utils/buildServerJs';
 import buildPages from './utils/buildPages';
-import printFileSizes from './utils/printFileSizes';
-import getPreviousSizeMap from './utils/getPreviousSizeMap';
+import {SRC, BUILD} from './utils/paths';
+import uniqueId from 'uuid/v4';
+import {join} from 'path';
 
-const BUILD = path.join(__dirname, '../build');
-const STATIC = path.join(__dirname, '../static');
-
-const copy = pify(fs.copy);
-const outputFile = pify(fs.outputFile);
 const emptyDir = pify(fs.emptyDir);
-
-const copyStaticFolder = () => copy(STATIC, BUILD, {dereference: true});
-
-const writeBuildData = ({hash}) =>
-  outputFile(`${BUILD}/buildData.json`, JSON.stringify({hash}));
+const copy = pify(fs.copy);
 
 const build = async () => {
-  const previousSizeMap = await getPreviousSizeMap();
-  await emptyDir(BUILD);
+  const buildId = uniqueId();
 
-  const [stats] = await Promise.all([
-    buildJs(),
-    buildCss(),
-    copyStaticFolder(),
-  ]);
+  await emptyDir(BUILD);
+  await buildServerJs(buildId);
 
   await Promise.all([
-    writeBuildData({hash: stats.hash}),
-    buildPages(stats.hash),
-    // TODO: build sitemap.txt
-    // TODO: build manifest file
+    copy(join(SRC, 'data'), join(BUILD, 'data')),
+    buildClientJs(buildId),
+    buildCss(),
+    buildPages(buildId),
   ]);
-
-  console.log('File sizes after gzip:\n');
-  await printFileSizes(stats, previousSizeMap);
-  console.log();
 };
 
 build().catch(error => {
-  throw error;
+  process.exitCode = 1;
+  console.error(error);
 });
