@@ -3,6 +3,7 @@ import {Redirect, Route, Switch} from 'react-router-dom';
 import Page from './Page';
 import pages from '../data/pages.json';
 import Nav from './Nav';
+import OnlineOfflineIndicator from './OnlineOfflineIndicator';
 
 // eslint-disable-next-line react/display-name
 const renderRedirect = to => () => <Redirect to={to} />;
@@ -12,6 +13,7 @@ const renderPage = pageData => () => <Page pageData={pageData} />;
 
 const App = () => (
   <div className="full-height">
+    <OnlineOfflineIndicator />
     <Nav
       items={pages
         .filter(page => page.showInNavMenu)

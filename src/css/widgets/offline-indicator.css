@@ -1,0 +1,7 @@
+.offline-indicator {
+  width: 100%;
+  line-height: 2;
+  background-color: rgb(var(--color-gray));
+  color: white;
+  text-align: center;
+}
