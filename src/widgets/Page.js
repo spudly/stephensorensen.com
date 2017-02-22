@@ -1,10 +1,11 @@
 import React, {PropTypes} from 'react';
 import buildWidget from '../utils/buildWidget';
 
-const Page = ({pageData}) =>
+const Page = ({pageData}) => (
   <div className="page">
     {(pageData.childWidgets || []).map(buildWidget)}
-  </div>;
+  </div>
+);
 
 Page.displayName = 'Page';
 

@@ -59,9 +59,7 @@ router.get('/manifest.webmanifest', serveManifest(BUILD_ID));
 router.get('/sw', serveJs(`${__dirname}/index.sw.js`));
 router.get('/gravatar', (request, response) => {
   httpRequest
-    .get(
-      'https://www.gravatar.com/avatar/8db4c1b03b20a1b5614f8e4a2cfbc188?d=retro&r=g&s=250',
-    )
+    .get('https://www.gravatar.com/avatar/8db4c1b03b20a1b5614f8e4a2cfbc188?d=retro&r=g&s=250')
     .pipe(response);
 });
 router.get(`/${BUILD_ID}/js`, cacheForever, serveJs(`${__dirname}/index.client.js`));

@@ -20,13 +20,14 @@ const buildPages = buildId => Promise.all(
         </StaticRouter>,
       );
 
-      const metaElement =
+      const metaElement = (
         <MetaHtml
           path={page.pathname}
           contentHtml={contentHtml}
           title={page.title}
           buildId={buildId}
-        />;
+        />
+      );
       const metaHtml = `<!doctype html>${renderToStaticMarkup(metaElement)}`;
       return outputFile(`${BUILD}/pages${page.pathname}.html`, metaHtml);
     } catch (error) {

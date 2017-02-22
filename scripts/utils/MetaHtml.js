@@ -1,7 +1,7 @@
 /* eslint-disable react/no-danger */
 import React, {PropTypes} from 'react';
 
-const MetaHtml = ({buildId, contentHtml, title}) =>
+const MetaHtml = ({buildId, contentHtml, title}) => (
   <html lang="en">
     <head>
       <title>{title}</title>
@@ -17,7 +17,8 @@ const MetaHtml = ({buildId, contentHtml, title}) =>
       <div className="root" dangerouslySetInnerHTML={{__html: contentHtml}} />
       <script src={`/${buildId}/js`} />
     </body>
-  </html>;
+  </html>
+);
 
 MetaHtml.displayName = 'MetaHtml';
 

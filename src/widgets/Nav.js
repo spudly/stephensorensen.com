@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import Burger from './Burger';
 
 class Nav extends React.Component {
-
   static displayName = 'Nav';
 
   static propTypes = {
@@ -31,20 +30,17 @@ class Nav extends React.Component {
           <Burger isOpen={isOpen} />
         </button>
         <ul className="nav-items">
-          {items.map(item =>
+          {items.map(item => (
             <Route key={item.url} path={item.url}>
-              {({match}) =>
-                <li
-                  key={item.url}
-                  className={classnames('nav-item', {'nav-item-active': match})}
-                >
+              {({match}) => (
+                <li key={item.url} className={classnames('nav-item', {'nav-item-active': match})}>
                   <Link to={item.url} onClick={this._handleLinkClick}>
                     {item.linkText}
                   </Link>
                 </li>
-              }
+              )}
             </Route>
-          )}
+          ))}
         </ul>
       </nav>
     );

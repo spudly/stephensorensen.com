@@ -11,7 +11,7 @@ const SocialLinks = (
     linkedin,
     email,
   },
-) =>
+) => (
   <ul>
     <li>
       <a rel="me" href={`https://www.facebook.com/${facebook}`}>Facebook</a>
@@ -21,8 +21,7 @@ const SocialLinks = (
         <a rel="me" href={`https://twitter.com/${twitter.replace(/^@/, '')}`}>
           Twitter
         </a>
-      </li>
-    }
+      </li>}
     <li>
       <a rel="me" href={`https://plus.google.com/${googleplus}`}>Google+</a>
     </li>
@@ -41,7 +40,8 @@ const SocialLinks = (
         Email: shuoink@gmail.com
       </a>
     </li>
-  </ul>;
+  </ul>
+);
 
 SocialLinks.displayName = 'SocialLinks';
 

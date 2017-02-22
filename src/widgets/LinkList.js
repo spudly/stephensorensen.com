@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import flatten from 'lodash/fp/flatten';
 
-const LinkList = ({items}) =>
+const LinkList = ({items}) => (
   <dl>
     {flatten(
       items.map(item => [
@@ -9,7 +9,8 @@ const LinkList = ({items}) =>
         <dd key={`${item.url}--dd`}>{item.description}</dd>,
       ]),
     )}
-  </dl>;
+  </dl>
+);
 
 LinkList.displayName = 'LinkList';
 

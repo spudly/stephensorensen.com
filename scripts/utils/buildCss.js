@@ -11,7 +11,7 @@ const readFile = pify(fs.readFile);
 // import cssnano from 'cssnano';
 
 const buildCss = async () => {
-  const plugins = [postcssImport, autoprefixer/* , cssnano*/];
+  const plugins = [postcssImport, autoprefixer];
   const css = await readFile(`${SRC}/css/index.css`);
   const result = await postcss(plugins).process(css, {
     from: `${SRC}/css/index.css`,

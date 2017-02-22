@@ -31,13 +31,7 @@ const OFFLINE_IMAGE = `
 </svg>
 `;
 
-const CACHE_URLS = [
-  '/',
-  '/about',
-  '/code',
-  `/${CACHE_KEY}/js`,
-  `/${CACHE_KEY}/css`,
-];
+const CACHE_URLS = ['/', '/about', '/code', `/${CACHE_KEY}/js`, `/${CACHE_KEY}/css`];
 
 const fetchFromCache = async request => {
   const response = await caches.match(request);

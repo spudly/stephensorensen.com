@@ -8,10 +8,7 @@ const TEMPLATE = path.join(__dirname, '../scripts/dev-template.html');
 
 const config = {
   devtool: 'cheap-module-source-map',
-  entry: [
-    require.resolve('react-dev-utils/webpackHotDevClient'),
-    `${SRC}/index.js`,
-  ],
+  entry: [require.resolve('react-dev-utils/webpackHotDevClient'), `${SRC}/index.js`],
   module: {
     loaders: [
       {
