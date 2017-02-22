@@ -14,11 +14,12 @@
       },
       {
         "id": "1",
-        "widgetType": "Gravatar",
+        "widgetType": "img",
         "props": {
-          "email": "shuoink@gmail.com",
-          "size": 250,
-          "className": "u-photo"
+          "src": "/gravatar",
+          "className": "u-photo",
+          "width": 250,
+          "height": 250
         }
       },
       {

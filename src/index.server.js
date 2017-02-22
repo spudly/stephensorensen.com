@@ -5,6 +5,7 @@ import path from 'path';
 import requestLogger from './utils/requestLogger';
 import serveManifest from './utils/serveManifest';
 import serveSitemap from './utils/serveSitemap';
+import httpRequest from 'request';
 
 // eslint-disable-next-line camelcase, prefer-destructuring
 const BUILD_ID = process.env.BUILD_ID;
@@ -56,6 +57,13 @@ router.get('/', redirect('/about', 303));
 router.get('/sitemap.txt', serveSitemap(pages));
 router.get('/manifest.webmanifest', serveManifest(BUILD_ID));
 router.get('/sw', serveJs(`${__dirname}/index.sw.js`));
+router.get('/gravatar', (request, response) => {
+  httpRequest
+    .get(
+      'https://www.gravatar.com/avatar/8db4c1b03b20a1b5614f8e4a2cfbc188?d=retro&r=g&s=250',
+    )
+    .pipe(response);
+});
 router.get(`/${BUILD_ID}/js`, cacheForever, serveJs(`${__dirname}/index.client.js`));
 router.get(`/${BUILD_ID}/css`, cacheForever, serveCss(`${__dirname}/index.css`));
 

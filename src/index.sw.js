@@ -7,7 +7,30 @@ import regeneratorRuntime from 'regenerator-runtime';
 // eslint-disable-next-line camelcase
 const CACHE_KEY = process.env.BUILD_ID;
 const OFFLINE_PAGE = {}; // TODO: define this
-const OFFLINE_IMAGE = {}; // TODO: define this
+
+const OFFLINE_IMAGE = `
+<svg
+  role="img"
+  aria-labelledby="offline-title"
+  viewBox="0 0 500 500"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <g fill="none" fill-rule="evenodd">
+    <path fill="#D8D8D8" d="M0 0h400v300H0z" />
+    <text
+      fill="#9B9B9B"
+      font-family="Times New Roman,Times,serif"
+      font-size="72"
+      font-weight="bold"
+    >
+      <tspan x="93" y="172">
+        offline
+      </tspan>
+    </text>
+  </g>
+</svg>
+`;
+
 const CACHE_URLS = [
   '/',
   '/about',
@@ -26,8 +49,10 @@ const fetchFromCache = async request => {
 
 const offlineResponse = resourceType => {
   if (resourceType === 'image') {
-    return new Response(OFFLINE_IMAGE.body, {
-      headers: OFFLINE_IMAGE.headers,
+    return new Response(OFFLINE_IMAGE, {
+      headers: {
+        'Content-Type': 'image/svg+xml',
+      },
     });
   }
 
@@ -57,7 +82,7 @@ const respondFromCacheThenNetwork = async request => {
     try {
       return await fetchAndCache(request);
     } catch (fetchError) {
-      return offlineResponse();
+      return offlineResponse('image');
     }
   }
 };
@@ -69,7 +94,7 @@ const respondFromNetworkThenCache = async request => {
     try {
       return await fetchFromCache(request);
     } catch (cacheError) {
-      return offlineResponse();
+      return offlineResponse('image');
     }
   }
 };
