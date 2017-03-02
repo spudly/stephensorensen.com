@@ -14,7 +14,6 @@
     "eslint": "^3.15.0",
     "filesize": "^3.5.4",
     "fs-extra": "^2.0.0",
-    "html-webpack-plugin": "^2.28.0",
     "jest": "^18.1.0",
     "lint-staged": "^3.3.1",
     "pify": "^2.3.0",
@@ -23,9 +22,7 @@
     "postcss-import": "^9.1.0",
     "pre-commit": "^1.2.2",
     "prettier": "^0.18.0",
-    "react-dev-utils": "^0.5.0",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.3.0"
+    "webpack": "^2.2.1"
   },
   "dependencies": {
     "classnames": "^2.2.5",
@@ -40,7 +37,6 @@
     "uuid": "^3.0.1"
   },
   "scripts": {
-    "dev": "babel-node scripts/dev.js",
     "start": "NODE_ENV=production node build/index.server.js",
     "build": "NODE_ENV=production babel-node scripts/build.js",
     "test": "jest",
