@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import flatten from 'lodash/fp/flatten';
+import flatten from '../utils/flatten';
 
 const LinkList = ({items}) => (
   <dl>
