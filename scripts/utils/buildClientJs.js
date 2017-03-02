@@ -19,7 +19,6 @@ const buildWebPackConfig = buildId => ({
         query: {
           babelrc: false,
           presets: [
-            'react',
             [
               'env',
               {

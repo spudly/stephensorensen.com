@@ -1,11 +1,10 @@
 import React, {PropTypes} from 'react';
 import buildWidget from '../utils/buildWidget';
 
-const Page = ({pageData}) => (
-  <div className="page">
-    {(pageData.childWidgets || []).map(buildWidget)}
-  </div>
-);
+const el = React.createElement;
+
+const Page = ({pageData}) =>
+  el('div', {className: 'page'}, (pageData.childWidgets || []).map(buildWidget));
 
 Page.displayName = 'Page';
 

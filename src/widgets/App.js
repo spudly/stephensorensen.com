@@ -5,28 +5,38 @@ import pages from '../data/pages.json';
 import Nav from './Nav';
 import OnlineOfflineIndicator from './OnlineOfflineIndicator';
 
-// eslint-disable-next-line react/display-name
-const renderRedirect = to => () => <Redirect to={to} />;
+const el = React.createElement;
 
 // eslint-disable-next-line react/display-name
-const renderPage = pageData => () => <Page pageData={pageData} />;
+const renderRedirect = to => () => el(Redirect, {to});
 
-const App = () => (
-  <div className="full-height">
-    <OnlineOfflineIndicator />
-    <Nav
-      items={pages
-        .filter(page => page.showInNavMenu)
-        .map(page => ({linkText: page.title, url: page.pathname}))}
-    />
-    <Switch>
-      <Route path="/" exact render={renderRedirect('/about')} />
-      {pages.map(page => (
-        <Route key={page.pathname} path={page.pathname} render={renderPage(page)} pageData={page} />
-      ))}
-      <Route path="*" render={renderPage(pages.find(page => page.pathname === '/404'))} />
-    </Switch>
-  </div>
+// eslint-disable-next-line react/display-name
+const renderPage = pageData => () => el(Page, {pageData});
+
+const App = () => el(
+  'div',
+  {className: 'full-height'},
+  el(OnlineOfflineIndicator, null),
+  el(Nav, {
+    items: pages
+      .filter(page => page.showInNavMenu)
+      .map(page => ({linkText: page.title, url: page.pathname})),
+  }),
+  el(
+    Switch,
+    null,
+    el(Route, {path: '/', exact: true, render: renderRedirect('/about')}),
+    pages.map(page => el(Route, {
+      key: page.pathname,
+      path: page.pathname,
+      render: renderPage(page),
+      pageData: page,
+    })),
+    el(Route, {
+      path: '*',
+      render: renderPage(pages.find(page => page.pathname === '/404')),
+    }),
+  ),
 );
 
 App.displayName = 'App';

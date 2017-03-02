@@ -1,14 +1,17 @@
 import React, {PropTypes} from 'react';
 import classnames from '../utils/classnames';
 
-const Burger = ({isOpen}) => (
-  <div className={classnames('burger', {'burger-open': isOpen})}>
-    <span />
-    <span />
-    <span />
-    <span />
-  </div>
-);
+const el = React.createElement;
+
+const Burger = ({isOpen}) =>
+  el(
+    'div',
+    {className: classnames('burger', {'burger-open': isOpen})},
+    el('span', null),
+    el('span', null),
+    el('span', null),
+    el('span', null),
+  );
 
 Burger.propTypes = {
   isOpen: PropTypes.bool.isRequired,

@@ -1,5 +1,7 @@
 import React from 'react';
 
+const el = React.createElement;
+
 class OnlineOfflineIndicator extends React.Component {
   static displayName = 'OnlineOfflineIndicator';
 
@@ -17,7 +19,7 @@ class OnlineOfflineIndicator extends React.Component {
 
   render() {
     if (this.state.offline) {
-      return <div className="offline-indicator">Offline</div>;
+      return el('div', {className: 'offline-indicator'}, 'Offline');
     }
 
     return null;

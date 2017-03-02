@@ -1,16 +1,19 @@
 import React, {PropTypes} from 'react';
 import flatten from '../utils/flatten';
 
-const LinkList = ({items}) => (
-  <dl>
-    {flatten(
+const el = React.createElement;
+
+const LinkList = ({items}) =>
+  el(
+    'dl',
+    null,
+    flatten(
       items.map(item => [
-        <dt key={`${item.url}--dt`}><a href={item.url}>{item.name}</a></dt>,
-        <dd key={`${item.url}--dd`}>{item.description}</dd>,
+        el('dt', {key: `${item.url}--dt`}, el('a', {href: item.url}, item.name)),
+        el('dd', {key: `${item.url}--dd`}, item.description),
       ]),
-    )}
-  </dl>
-);
+    ),
+  );
 
 LinkList.displayName = 'LinkList';
 

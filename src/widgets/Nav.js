@@ -3,6 +3,8 @@ import {Link, Route} from 'react-router-dom';
 import classnames from '../utils/classnames';
 import Burger from './Burger';
 
+const el = React.createElement;
+
 class Nav extends React.Component {
   static displayName = 'Nav';
 
@@ -24,25 +26,25 @@ class Nav extends React.Component {
   render() {
     const {items} = this.props;
     const {isOpen} = this.state;
-    return (
-      <nav className={classnames('nav', {'nav-open': isOpen})}>
-        <button type="button" className="nav-toggle" onClick={this._handleButtonClick}>
-          <Burger isOpen={isOpen} />
-        </button>
-        <ul className="nav-items">
-          {items.map(item => (
-            <Route key={item.url} path={item.url}>
-              {({match}) => (
-                <li key={item.url} className={classnames('nav-item', {'nav-item-active': match})}>
-                  <Link to={item.url} onClick={this._handleLinkClick}>
-                    {item.linkText}
-                  </Link>
-                </li>
-              )}
-            </Route>
-          ))}
-        </ul>
-      </nav>
+    return el(
+      'nav',
+      {className: classnames('nav', {'nav-open': isOpen})},
+      el(
+        'button',
+        {type: 'button', className: 'nav-toggle', onClick: this._handleButtonClick},
+        el(Burger, {isOpen}),
+      ),
+      el(
+        'ul',
+        {className: 'nav-items'},
+        items.map(item =>
+          el(Route, {key: item.url, path: item.url}, ({match}) =>
+            el(
+              'li',
+              {key: item.url, className: classnames('nav-item', {'nav-item-active': match})},
+              el(Link, {to: item.url, onClick: this._handleLinkClick}, item.linkText),
+            ))),
+      ),
     );
   }
 
