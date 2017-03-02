@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Link, Route} from 'react-router-dom';
-import classnames from 'classnames';
+import classnames from '../utils/classnames';
 import Burger from './Burger';
 
 class Nav extends React.Component {
