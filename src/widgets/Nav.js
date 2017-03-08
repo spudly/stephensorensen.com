@@ -1,23 +1,19 @@
-import React, {PropTypes} from 'react';
-import {Link, Route} from 'react-router-dom';
-import classnames from '../utils/classnames';
-import Burger from './Burger';
+const React = require('react');
+const {Link, Route} = require('react-router-dom');
+const classnames = require('../utils/classnames');
+const Burger = require('./Burger');
 
 const el = React.createElement;
 
 class Nav extends React.Component {
-  static displayName = 'Nav';
-
-  static propTypes = {
-    items: PropTypes.shape({
-      linkText: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-    }).isRequired,
-  };
-
-  state = {
-    isOpen: true,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: true,
+    };
+    this._handleLinkClick = () => this.setState({isOpen: false});
+    this._handleButtonClick = () => this.setState({isOpen: !this.state.isOpen});
+  }
 
   componentDidMount() {
     this.setState({isOpen: false});
@@ -32,7 +28,7 @@ class Nav extends React.Component {
       el(
         'button',
         {type: 'button', className: 'nav-toggle', onClick: this._handleButtonClick},
-        el(Burger, {isOpen}),
+        el(Burger, {isOpen})
       ),
       el(
         'ul',
@@ -42,17 +38,20 @@ class Nav extends React.Component {
             el(
               'li',
               {key: item.url, className: classnames('nav-item', {'nav-item-active': match})},
-              el(Link, {to: item.url, onClick: this._handleLinkClick}, item.linkText),
-            ))),
-      ),
+              el(Link, {to: item.url, onClick: this._handleLinkClick}, item.linkText)
+            )))
+      )
     );
   }
-
-  // eslint-disable-next-line no-invalid-this
-  _handleLinkClick = () => this.setState({isOpen: false});
-
-  // eslint-disable-next-line no-invalid-this
-  _handleButtonClick = () => this.setState({isOpen: !this.state.isOpen});
 }
 
-export default Nav;
+Nav.displayName = 'Nav';
+
+Nav.propTypes = {
+  items: React.PropTypes.shape({
+    linkText: React.PropTypes.string.isRequired,
+    url: React.PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+module.exports = Nav;

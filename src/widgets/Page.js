@@ -1,5 +1,5 @@
-import React, {PropTypes} from 'react';
-import buildWidget from '../utils/buildWidget';
+const React = require('react');
+const buildWidget = require('../utils/buildWidget');
 
 const el = React.createElement;
 
@@ -9,9 +9,9 @@ const Page = ({pageData}) =>
 Page.displayName = 'Page';
 
 Page.propTypes = {
-  pageData: PropTypes.shape({
-    childWidgets: PropTypes.array,
+  pageData: React.PropTypes.shape({
+    childWidgets: React.PropTypes.array,
   }).isRequired,
 };
 
-export default Page;
+module.exports = Page;

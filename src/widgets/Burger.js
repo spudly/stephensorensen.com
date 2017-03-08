@@ -1,5 +1,5 @@
-import React, {PropTypes} from 'react';
-import classnames from '../utils/classnames';
+const React = require('react');
+const classnames = require('../utils/classnames');
 
 const el = React.createElement;
 
@@ -10,13 +10,13 @@ const Burger = ({isOpen}) =>
     el('span', null),
     el('span', null),
     el('span', null),
-    el('span', null),
+    el('span', null)
   );
 
 Burger.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
+  isOpen: React.PropTypes.bool.isRequired,
 };
 
 Burger.displayName = 'Burger';
 
-export default Burger;
+module.exports = Burger;

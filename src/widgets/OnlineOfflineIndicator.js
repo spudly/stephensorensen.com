@@ -1,13 +1,16 @@
-import React from 'react';
+const React = require('react');
 
 const el = React.createElement;
 
 class OnlineOfflineIndicator extends React.Component {
-  static displayName = 'OnlineOfflineIndicator';
-
-  state = {
-    offline: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      offline: false,
+    };
+    this._handleOffline = () => this.setState({offline: true});
+    this._handleOnline = () => this.setState({offline: false});
+  }
 
   componentDidMount() {
     if (navigator.onLine === false) {
@@ -24,12 +27,8 @@ class OnlineOfflineIndicator extends React.Component {
 
     return null;
   }
-
-  // eslint-disable-next-line no-invalid-this
-  _handleOffline = () => this.setState({offline: true});
-
-  // eslint-disable-next-line no-invalid-this
-  _handleOnline = () => this.setState({offline: false});
 }
 
-export default OnlineOfflineIndicator;
+OnlineOfflineIndicator.displayName = 'OnlineOfflineIndicator';
+
+module.exports = OnlineOfflineIndicator;

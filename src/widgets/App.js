@@ -1,9 +1,9 @@
-import React from 'react';
-import {Redirect, Route, Switch} from 'react-router-dom';
-import Page from './Page';
-import pages from '../data/pages.json';
-import Nav from './Nav';
-import OnlineOfflineIndicator from './OnlineOfflineIndicator';
+const React = require('react');
+const {Redirect, Route, Switch} = require('react-router-dom');
+const Page = require('./Page');
+const pages = require('../data/pages.json');
+const Nav = require('./Nav');
+const OnlineOfflineIndicator = require('./OnlineOfflineIndicator');
 
 const el = React.createElement;
 
@@ -35,10 +35,10 @@ const App = () => el(
     el(Route, {
       path: '*',
       render: renderPage(pages.find(page => page.pathname === '/404')),
-    }),
-  ),
+    })
+  )
 );
 
 App.displayName = 'App';
 
-export default App;
+module.exports = App;

@@ -1,11 +1,18 @@
 /* eslint-disable no-console */
-import express, {Router as createRouter} from 'express';
-import pages from './data/pages.json';
-import path from 'path';
-import requestLogger from './utils/requestLogger';
-import serveManifest from './utils/serveManifest';
-import serveSitemap from './utils/serveSitemap';
-import httpRequest from 'request';
+const express = require('express');
+const pages = require('./data/pages.json');
+const path = require('path');
+const requestLogger = require('./utils/requestLogger');
+const serveManifest = require('./utils/serveManifest');
+const serveSitemap = require('./utils/serveSitemap');
+const httpRequest = require('request');
+const {StaticRouter} = require('react-router-dom');
+const {renderToString, renderToStaticMarkup} = require('react-dom/server');
+const React = require('react');
+const App = require('./widgets/App');
+const MetaHtml = require('./widgets/MetaHtml');
+
+const {Router: createRouter} = express;
 
 // eslint-disable-next-line camelcase, prefer-destructuring
 const BUILD_ID = process.env.BUILD_ID;
@@ -28,10 +35,6 @@ const cacheForever = (req, resp, next) => {
 };
 
 const sendFile = file => (req, resp) => resp.sendFile(file);
-
-const serveHtml = file => (req, resp) => {
-  resp.header('Service-Worker-Allowed', '/').sendFile(file);
-};
 
 const serveJs = file => (req, resp) => {
   resp.header('Service-Worker-Allowed', '/').sendFile(file);
@@ -68,7 +71,22 @@ router.get(`/${BUILD_ID}/css`, cacheForever, serveCss(`${__dirname}/index.css`))
 router.use(`/${BUILD_ID}`, express.static(STATIC_DIR, {setHeaders: setCacheForeverHeaders}));
 
 pages.forEach(page => {
-  router.get(page.pathname, serveHtml(`${__dirname}/pages${page.pathname}.html`));
+  router.get(page.pathname, (req, resp, next) => {
+    try {
+      const contentHtml = renderToString(
+        React.createElement(StaticRouter, {location: page.pathname}, React.createElement(App, null))
+      );
+
+      const metaElement = React.createElement(MetaHtml, {
+        path: page.pathname,
+        contentHtml,
+        title: page.title,
+      });
+      resp.send(`<!doctype html>${renderToStaticMarkup(metaElement)}`);
+    } catch (error) {
+      next(error);
+    }
+  });
 });
 router.all('*', serve404(`${__dirname}/pages/404.html`));
 

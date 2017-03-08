@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React, {PropTypes} from 'react';
+const React = require('react');
 
 const el = React.createElement;
 
@@ -17,22 +17,22 @@ const MetaHtml = ({buildId, contentHtml, title}) =>
       el('link', {rel: 'shortcut icon', href: '/favicon.ico'}),
       el('link', {rel: 'stylesheet', href: `/${buildId}/css`}),
       el('link', {rel: 'manifest', href: '/manifest.webmanifest'}),
-      el('link', {rel: 'icon', type: 'image/png', href: '/images/logo32.png'}),
+      el('link', {rel: 'icon', type: 'image/png', href: '/images/logo32.png'})
     ),
     el(
       'body',
       null,
       el('div', {className: 'root', dangerouslySetInnerHTML: {__html: contentHtml}}),
-      el('script', {src: `/${buildId}/js`}),
-    ),
+      el('script', {src: `/${buildId}/js`})
+    )
   );
 
 MetaHtml.displayName = 'MetaHtml';
 
 MetaHtml.propTypes = {
-  buildId: PropTypes.string.isRequired,
-  contentHtml: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  buildId: React.PropTypes.string.isRequired,
+  contentHtml: React.PropTypes.string.isRequired,
+  title: React.PropTypes.string.isRequired,
 };
 
-export default MetaHtml;
+module.exports = MetaHtml;

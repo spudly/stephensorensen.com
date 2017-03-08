@@ -5,4 +5,4 @@ const requestLogger = (req, resp, next) => {
   console.log(`[${String(new Date())}] ${req.url} => ${resp.statusCode}`);
 };
 
-export default requestLogger;
+module.exports = requestLogger;

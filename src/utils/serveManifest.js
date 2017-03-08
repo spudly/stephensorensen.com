@@ -53,4 +53,4 @@ const serveManifest = buildId => (req, resp) => {
   resp.type('application/manifest+json').json(manifest);
 };
 
-export default serveManifest;
+module.exports = serveManifest;

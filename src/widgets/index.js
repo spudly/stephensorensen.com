@@ -1,4 +1,6 @@
-export {default as LinkList} from './LinkList';
-export {default as PageHeader} from './PageHeader';
-export {default as Gravatar} from 'react-gravatar';
-export {default as SocialLinks} from './SocialLinks';
+module.exports = {
+  LinkList: require('./LinkList'),
+  PageHeader: require('./PageHeader'),
+  Gravatar: require('react-gravatar'),
+  SocialLinks: require('./SocialLinks'),
+};

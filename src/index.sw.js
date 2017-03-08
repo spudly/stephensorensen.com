@@ -2,7 +2,7 @@
 
 // TODO: figure out why I even need this...
 // eslint-disable-next-line no-unused-vars
-import regeneratorRuntime from 'regenerator-runtime';
+const regeneratorRuntime = require('regenerator-runtime');
 
 // eslint-disable-next-line camelcase
 const CACHE_KEY = process.env.BUILD_ID;

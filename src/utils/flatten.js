@@ -7,4 +7,4 @@ const reducer = (array, value) => {
 
 const flatten = array => array.reduce(reducer, []);
 
-export default flatten;
+module.exports = flatten;

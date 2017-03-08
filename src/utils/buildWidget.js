@@ -1,5 +1,5 @@
-import React from 'react';
-import * as widgets from '../widgets';
+const React = require('react');
+const widgets = require('../widgets');
 
 // eslint-disable-next-line react/display-name
 const buildWidget = widgetDescriptor => {
@@ -10,11 +10,11 @@ const buildWidget = widgetDescriptor => {
   const {id, widgetType, props, childWidgets} = widgetDescriptor;
   const WidgetComponent = widgets[widgetType] || widgetType;
 
-  return (
-    <WidgetComponent key={id} {...props}>
-      {childWidgets && childWidgets.map(buildWidget)}
-    </WidgetComponent>
+  return React.createElement(
+    WidgetComponent,
+    Object.assign({key: id}, props),
+    childWidgets && childWidgets.map(buildWidget)
   );
 };
 
-export default buildWidget;
+module.exports = buildWidget;

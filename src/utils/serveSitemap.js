@@ -6,4 +6,4 @@ const serveSitemap = pages => (req, resp) => {
   resp.type('text').send(sitemap);
 };
 
-export default serveSitemap;
+module.exports = serveSitemap;

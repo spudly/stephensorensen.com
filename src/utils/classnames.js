@@ -11,4 +11,4 @@ const reducer = (className, value) => {
 
 const classnames = (...args) => args.reduce(reducer, '').trim();
 
-export default classnames;
+module.exports = classnames;
