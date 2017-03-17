@@ -1,6 +1,6 @@
 [
   {
-    "pathname": "/about",
+    "pathname": "/",
     "title": "#whoami",
     "showInNavMenu": true,
     "showInSiteMap": true,

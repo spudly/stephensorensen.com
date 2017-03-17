@@ -3,7 +3,7 @@ const React = require('react');
 
 const el = React.createElement;
 
-const MetaHtml = ({buildId, contentHtml, title}) =>
+const MetaHtml = ({version, contentHtml, title}) =>
   el(
     'html',
     {lang: 'en'},
@@ -15,7 +15,7 @@ const MetaHtml = ({buildId, contentHtml, title}) =>
       el('meta', {name: 'viewport', content: 'width=device-width, initial-scale=1'}),
       el('meta', {name: 'theme-color', content: '#444'}),
       el('link', {rel: 'shortcut icon', href: '/favicon.ico'}),
-      el('link', {rel: 'stylesheet', href: `/${buildId}/css`}),
+      el('link', {rel: 'stylesheet', href: `/${version}/css`}),
       el('link', {rel: 'manifest', href: '/manifest.webmanifest'}),
       el('link', {rel: 'icon', type: 'image/png', href: '/images/logo32.png'})
     ),
@@ -23,16 +23,16 @@ const MetaHtml = ({buildId, contentHtml, title}) =>
       'body',
       null,
       el('div', {className: 'root', dangerouslySetInnerHTML: {__html: contentHtml}}),
-      el('script', {src: `/${buildId}/js`})
+      el('script', {src: `/${version}/js`})
     )
   );
 
 MetaHtml.displayName = 'MetaHtml';
 
 MetaHtml.propTypes = {
-  buildId: React.PropTypes.string.isRequired,
+  version: React.PropTypes.string.isRequired,
   contentHtml: React.PropTypes.string.isRequired,
-  title: React.PropTypes.string.isRequired,
+  title: React.PropTypes.string.isRequired
 };
 
 module.exports = MetaHtml;
