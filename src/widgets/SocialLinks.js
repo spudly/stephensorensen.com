@@ -2,66 +2,51 @@ const React = require('react');
 
 const el = React.createElement;
 
-const SocialLinks = (
-  {
-    facebook,
-    twitter,
-    googleplus,
-    medium,
-    github,
-    stackoverflow,
-    linkedin,
-    email,
+const linkTypes = {
+  facebook: {
+    title: () => 'Facebook',
+    url: value => `https://www.facebook.com/${value}`
+  },
+  twitter: {
+    title: () => 'twitter',
+    url: value => `https://twitter.com/${value.replace(/^@/, '')}`
+  },
+  googleplus: {
+    title: () => 'Google+',
+    url: value => `https://plus.google.com/${value}`
+  },
+  medium: {
+    title: () => 'Medium',
+    url: value => `https://medium.com/${value}`
+  },
+  github: {
+    title: () => 'GitHub',
+    url: value => `https://github.com/${value}`
+  },
+  stackoverflow: {
+    title: () => 'StackOverflow',
+    url: value => `http://stackoverflow.com/users/${value}`
+  },
+  linkedin: {
+    title: () => 'LinkedIn',
+    url: value => `https://www.linkedin.com/in/${value}`
+  },
+  email: {
+    title: value => `Email (${value})`,
+    url: value => `mailto:${value}`
   }
-) => el(
+};
+
+const SocialLinks = ({links}) => el(
   'ul',
   null,
-  el('li', null, el('a', {rel: 'me', href: `https://www.facebook.com/${facebook}`}, 'Facebook')),
-  twitter &&
-    el(
-      'li',
-      null,
-      el(
-        'a',
-        {
-          rel: 'me',
-          href: `https://twitter.com/${twitter.replace(/^@/, '')}`,
-        },
-        'Twitter'
-      )
-    ),
-  el('li', null, el('a', {rel: 'me', href: `https://plus.google.com/${googleplus}`}, 'Google+')),
-  el('li', null, el('a', {rel: 'me', href: `https://medium.com/${medium}`}, 'Medium')),
-  el(
-    'li',
-    null,
-    el(
-      'a',
-      {
-        rel: 'me',
-        href: `https://github.com/${github}`,
-      },
-      'GitHub'
-    )
-  ),
-  el(
-    'li',
-    null,
-    el(
-      'a',
-      {
-        rel: 'me',
-        href: `http://stackoverflow.com/users/${stackoverflow}`,
-      },
-      'StackOverflow'
-    )
-  ),
-  el('li', null, el('a', {rel: 'me', href: `https://www.linkedin.com/in/${linkedin}`}, 'LinkedIn')),
-  el(
-    'li',
-    null,
-    el('a', {rel: 'me', className: 'u-email', href: `mailto:${email}`}, 'Email: shuoink@gmail.com')
-  )
+  links.map(link => {
+    const {title, url} = linkTypes[link.type] || {};
+    if (!title) {
+      return null;
+    }
+    return el('li', {}, el('a', {rel: 'me', href: url(link.value)}, title(link.value)));
+  })
 );
 
 SocialLinks.displayName = 'SocialLinks';
@@ -74,7 +59,7 @@ SocialLinks.propTypes = {
   linkedin: React.PropTypes.string.isRequired,
   medium: React.PropTypes.string.isRequired,
   stackoverflow: React.PropTypes.string.isRequired,
-  twitter: React.PropTypes.string.isRequired,
+  twitter: React.PropTypes.string.isRequired
 };
 
 module.exports = SocialLinks;

@@ -9,6 +9,8 @@ const gravatarProxy = require('./middleware/gravatarProxy');
 const renderPage = require('./middleware/renderPage');
 const logRequest = require('./middleware/logRequest');
 const errorHandler = require('./middleware/errorHandler');
+const sendCss = require('./middleware/sendCss');
+const sendJs = require('./middleware/sendJs');
 
 // eslint-disable-next-line camelcase, prefer-destructuring
 const PORT = process.env.PORT || 8080;
@@ -27,13 +29,12 @@ const middleware = logRequest(
       get('/manifest.webmanifest', serveManifest(version)),
       get('/sw', sendFile(`${__dirname}/index.sw.js`)),
       get('/gravatar', gravatarProxy),
-      get(`/${version}/js`, cacheForever, sendFile(`${__dirname}/index.client.js`)),
-      get(`/${version}/css`, cacheForever, sendFile(`${__dirname}/css/index.css`)),
+      get(`/${version}/js`, cacheForever, sendJs(`${__dirname}/index.client.js`)),
+      get(`/${version}/css`, cacheForever, sendCss(`${__dirname}/css/index.css`)),
       ...pages.map(page => get(page.pathname, renderPage(page.pathname))),
       // router.use(`/${version}`, express.static(STATIC_DIR, {setHeaders: setCacheForeverHeaders}));
       async (response, context) => {
         if (!response.status && !response.body) {
-          console.log('yo', await renderPage('/404')(response, context));
           return Object.assign({}, await renderPage('/404')(response, context), {status: 404});
         }
         return response;

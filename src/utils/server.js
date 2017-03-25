@@ -1,5 +1,13 @@
 const http = require('http');
-const {Readable} = require('stream');
+const fs = require('fs');
+const set = require('./set');
+const compose = require('./compose');
+
+const INITIAL_RESPONSE = {
+  status: 404,
+  body: 'Not Found',
+  headers: {'Content-Type': 'text/plain'}
+};
 
 exports.start = async (middleware, {port}) => {
   const server = http.createServer(async (request, nativeResponse) => {
@@ -9,12 +17,12 @@ exports.start = async (middleware, {port}) => {
         method: request.method,
         url: request.url
       };
-      const response = await middleware({}, context);
+      const response = await middleware(INITIAL_RESPONSE, context);
       if (response.type) {
         nativeResponse.setHeader('Content-Type', response.type);
       }
       nativeResponse.statusCode = response.status || 500;
-      if (response.body instanceof Readable) {
+      if (response.body && typeof response.body.pipe === 'function') {
         response.body.pipe(nativeResponse);
       } else if (typeof response.body === 'string') {
         nativeResponse.end(response.body);
@@ -44,28 +52,23 @@ const reduceAsync = async (array, reducer, initialValue) => {
   return value;
 };
 
-exports.router = (...middlewares) =>
+const combineMiddlewares = (exports.combineMiddlewares = (exports.router = (...middlewares) =>
   (response, context) =>
     reduceAsync(
       middlewares,
       (currentResponse, middleware) => middleware(currentResponse, context),
       response
-    );
+    )));
 
-exports.get = (url, middleware) => (response, context) => {
+exports.get = (url, ...middlewares) => (response, context) => {
   if (context.method === 'GET' && context.url === url) {
-    return middleware(response, context);
+    return combineMiddlewares(...middlewares)(response, context);
   }
   return response;
 };
 
-exports.setHeader = (key, value) => response => Object.assign({}, response, {
-  headers: Object.assign({}, response.headers, {[key]: value})
-});
-
 exports.sendFile = file => async response => {
-  // TODO:
   const stream = fs.createReadStream(file);
   const mimeType = 'text/html'; // TODO: getMimeTypeSomehow(file)
-  return compose(set('body', stream), setHeader('Content-Type', mimeType))(response);
+  return compose(set('body', stream), set('status', 200), set('type', mimeType))(response);
 };
