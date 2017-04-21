@@ -1,6 +1,0 @@
-.full-height {
-  height: 0; /* makes min-height work for some reason. chrome bug? */
-  min-height: 100%;
-  padding: 0;
-  margin: 0;
-}

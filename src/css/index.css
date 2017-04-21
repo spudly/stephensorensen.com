@@ -1,9 +1,0 @@
-@import './base/index.css';
-@import './utils/index.css';
-@import './widgets/index.css';
-@import './themes/index.css';
-
-:root {
-  --color-red: 145, 37, 37;
-  --color-gray: 170, 170, 170;
-}
