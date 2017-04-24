@@ -44,7 +44,7 @@
   },
   "pre-commit": "lint:staged",
   "dependencies": {
-    "http-fantasy-land": "^0.1.6",
+    "http-fantasy-land": "^1.0.1",
     "ramda": "^0.23.0"
   }
 }

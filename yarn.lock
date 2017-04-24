@@ -1520,9 +1520,9 @@ home-or-tmp@^2.0.0:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.1"
 
-http-fantasy-land@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/http-fantasy-land/-/http-fantasy-land-0.1.6.tgz#080e2b356af72df14676f5abad665ab46a70503d"
+http-fantasy-land@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/http-fantasy-land/-/http-fantasy-land-1.0.1.tgz#4b55b253eaf8dd654b0f39246a5280c878a02cd7"
   dependencies:
     mime-db "^1.27.0"
     ramda "^0.23.0"
