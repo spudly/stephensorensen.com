@@ -12,6 +12,7 @@ const server = composeRoutes(
   get('/icons/github.svg', sendFile(`${__dirname}/../client/icons/github.svg`)),
   get('/icons/stack-overflow.svg', sendFile(`${__dirname}/../client/icons/stack-overflow.svg`)),
   get('/icons/twitter.svg', sendFile(`${__dirname}/../client/icons/twitter.svg`)),
+  get('/icons/email.svg', sendFile(`${__dirname}/../client/icons/email.svg`)),
 );
 
 listen(server, {port: PORT})
