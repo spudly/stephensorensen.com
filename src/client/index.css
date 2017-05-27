@@ -60,19 +60,6 @@ a:hover, a:focus {
   }
 }
 
-@keyframes polaroid {
-  0% {transform: rotate(5deg) rotateX(45deg);}
-  5% {transform: rotate(-6deg) rotateX(-10deg);}
-  10% {transform: rotate(2deg) rotateX(78deg);}
-  15% {transform: rotate(0deg) rotateX(-5deg);}
-  20% {transform: rotate(-9deg) rotateX(56deg);}
-  25% {transform: rotate(2deg) rotateX(-10deg);}
-  30% {transform: rotate(-7deg) rotateX(87deg);}
-  35% {transform: rotate(-1deg) rotateX(3deg);}
-  40% {transform: rotate(-9deg) rotateX(40deg);}
-  50% {transform: rotate(-3deg) rotateX(10deg);}
-}
-
 .perspective {
   perspective: 1000px;
 }
@@ -86,18 +73,13 @@ a:hover, a:focus {
   /* offset-x | offset-y | blur-radius | spread-radius | color */
   box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.5);
   background: #fffffa; /* off-white */
-  animation: 5s linear polaroid;
-  transform: rotate(-3deg) rotateX(10deg);
+  transform: rotate(-1deg) rotateX(2deg);
 }
 
 .polaroid > img {
   width: 250px;
   height: 250px;
   animation: 5s ease-in polaroid-img;
-}
-
-.polaroid::after {
-
 }
 
 @media (min-width: 420px) {
