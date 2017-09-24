@@ -1,4 +1,4 @@
-import {listen, composeRoutes, setHeader, dir} from 'http-fantasy-land';
+const {listen, composeRoutes, setHeader, dir} = require('http-fantasy-land');
 
 const PORT = 8080;
 
