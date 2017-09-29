@@ -26,10 +26,14 @@ const reconcileChildElement = (vElement, element, parent) => {
     return parent.appendChild(document.createTextNode(vElement));
   }
 
-  if (element && vElement && element.tagName.toLowerCase() !== vElement.type) {
+  if (
+    element &&
+    vElement &&
+    (element.nodeType === 3 || element.tagName.toLowerCase() !== vElement.type)
+  ) {
     const el = document.createElement(vElement.type);
     element.replaceWith(el);
-    return element;
+    return el;
   }
 
   if (vElement && !element) {
@@ -64,22 +68,41 @@ const render = (element, container) => reconcileChildren([element], container);
 
 const createElement = (type, props, children) => ({type, props, children});
 
-const handleClick = () => {
-  render(
-    createElement(
-      'div',
-      {style: 'cursor: default; position: fixed; top: 10px; left: 10px', onClick: handleClick},
-      ['😎'],
-    ),
-    document.getElementById('container'),
-  );
-};
+class WebSmiley extends HTMLElement {
+  constructor() {
+    super();
+    this.state = {
+      emoji: '😀',
+      cursor: 'pointer',
+    };
+    this._handleClick = this._handleClick.bind(this);
+  }
 
-render(
-  createElement(
-    'div',
-    {style: 'cursor: pointer; position: fixed; top: 10px; left: 10px', onClick: handleClick},
-    ['😀'],
-  ),
-  document.getElementById('container'),
-);
+  connectedCallback() {
+    this.attachShadow({mode: 'open'});
+    this._render();
+  }
+
+  _render() {
+    render(
+      createElement(
+        'div',
+        {
+          style: `cursor: ${this.state.cursor}; position: fixed; top: 10px; left: 10px`,
+          onClick: this._handleClick,
+        },
+        [this.state.emoji],
+      ),
+      this.shadowRoot,
+    );
+  }
+
+  _handleClick() {
+    this.state.emoji = '😎';
+    this.state.cursor = 'default';
+    this._render();
+  }
+}
+customElements.define('web-smiley', WebSmiley);
+
+render(createElement('web-smiley', {}, []), document.querySelector('#container'));
