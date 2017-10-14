@@ -21,14 +21,17 @@
     "eslint-plugin-react": "^7.4.0",
     "lint-staged": "^4.2.2",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.7.0"
+    "prettier": "^1.7.0",
+    "tiny-lr": "^1.0.5",
+    "watchify-middleware": "^1.6.0"
   },
   "scripts": {
-    "build": "browserify client/index.js > client/index.build.js",
+    "build": "browserify index.client.js > index.client.build.js",
     "postinstall": "npm run build",
-    "now-start": "node server/index.js",
-    "start": "node server/index.js",
+    "now-start": "babel-node index.server.js",
+    "start": "NODE_ENV=development babel-node index.server.js",
     "deploy": "now -e TWITTER_CONSUMER_KEY -e TWITTER_CONSUMER_SECRET",
+    "deploy:alias": "now alias",
     "test": "jest",
     "lint:staged": "lint-staged",
     "lint": "eslint ."

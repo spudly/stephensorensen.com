@@ -1,5 +1,11 @@
 import React from 'react';
 import Hero from './Hero';
+import EmailIcon from './EmailIcon';
+import MediumIcon from './MediumIcon';
+import GithubIcon from './GithubIcon';
+import StackOverflowIcon from './StackOverflowIcon';
+import TwitterIcon from './TwitterIcon';
+import FacebookIcon from './FacebookIcon';
 
 const IntroHero = () => (
   <Hero
@@ -30,32 +36,32 @@ const IntroHero = () => (
     <ul className="profiles">
       <li>
         <a href="mailto:shuoink@gmail.com">
-          <img src="/icons/email.svg" alt="Email: shuoink@gmail.com" />{' '}
+          <EmailIcon />
         </a>
       </li>
       <li>
         <a href="https://medium.com/@shuoink">
-          <img src="/icons/medium.svg" alt="Medium Profile" />{' '}
+          <MediumIcon />
         </a>
       </li>
       <li>
         <a href="https://github.com/spudly">
-          <img src="/icons/github.svg" alt="Github Profile" />{' '}
+          <GithubIcon />
         </a>
       </li>
       <li>
         <a href="http://stackoverflow.com/users/163699/spudly">
-          <img src="/icons/stack-overflow.svg" alt="Stack Overflow Profile" />{' '}
+          <StackOverflowIcon />
         </a>
       </li>
       <li>
         <a href="https://twitter.com/shuoink">
-          <img src="/icons/twitter.svg" alt="Twitter Profile" />{' '}
+          <TwitterIcon />
         </a>
       </li>
       <li>
         <a href="https://www.facebook.com/stephenjohnsorensen">
-          <img src="/icons/facebook.svg" alt="Facebook Profile" />{' '}
+          <FacebookIcon />
         </a>
       </li>
     </ul>
