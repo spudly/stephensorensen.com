@@ -1,0 +1,46 @@
+.progman-icon {
+  background: #eee;
+  width: 32px;
+  height: 32px;
+}
+
+.progman-icon__window {
+  stroke: black;
+  fill: white;
+}
+
+.progman-icon__window-title {
+  stroke: black;
+  fill: blue;
+}
+
+.progman-icon__puter {
+  stroke: black;
+  fill: #ccc;
+}
+
+.progman-icon__puter-screen {
+  stroke: blue;
+  fill: blue;
+}
+
+.progman-icon__puter-screen-highlight {
+  stroke: #eef;
+  fill: none;
+}
+
+.progman-icon__puter-highlight {
+  stroke: white;
+  fill: none;
+}
+
+.progman-icon__puter-shadow {
+  stroke: #555;
+  fill: none;
+}
+
+.progman-icon__icon,
+.progman-icon__icon-text {
+  stroke: black;
+  fill: black;
+}

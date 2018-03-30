@@ -1,4 +1,6 @@
 node_modules
 .DS_Store
 npm-debug.log
-index.client.build.js
+.cache
+dist
+build

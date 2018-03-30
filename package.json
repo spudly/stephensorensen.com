@@ -3,64 +3,21 @@
   "private": true,
   "version": "0.0.9",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^7.2.3",
-    "babel-plugin-syntax-jsx": "^6.18.0",
-    "babel-plugin-syntax-trailing-function-commas": "^6.22.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-env": "^1.6.0",
-    "babelify": "^7.3.0",
-    "browserify": "^14.4.0",
-    "eslint": "^4.7.2",
-    "eslint-config-react-app": "^2.0.1",
-    "eslint-plugin-flowtype": "^2.39.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.4.0",
-    "lint-staged": "^4.2.2",
-    "pre-commit": "^1.2.2",
-    "prettier": "^1.7.0",
-    "tiny-lr": "^1.0.5",
-    "watchify-middleware": "^1.6.0"
+    "@types/jest": "^22.2.2",
+    "jest": "^22.4.3",
+    "lint-staged": "^7.0.0",
+    "prettier": "^1.11.1",
+    "ts-jest": "^22.4.2",
+    "typescript": "^2.8.1"
   },
   "scripts": {
-    "build": "browserify index.client.js > index.client.build.js",
-    "postinstall": "npm run build",
-    "now-start": "babel-node index.server.js",
-    "start": "NODE_ENV=development babel-node index.server.js",
-    "deploy": "now -e TWITTER_CONSUMER_KEY -e TWITTER_CONSUMER_SECRET",
-    "deploy:alias": "now alias",
+    "//now-start": "babel-node index.server.js",
+    "//build": "rollup -c",
+    "start": "parcel src/index.html",
+    "//deploy": "now -e TWITTER_CONSUMER_KEY -e TWITTER_CONSUMER_SECRET",
+    "//deploy:alias": "now alias",
     "test": "jest",
-    "lint:staged": "lint-staged",
-    "lint": "eslint ."
-  },
-  "babel": {
-    "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "node": "8.5",
-            "browsers": "last 2 chrome versions"
-          }
-        }
-      ]
-    ],
-    "plugins": [
-      "transform-class-properties",
-      "transform-object-rest-spread",
-      "syntax-trailing-function-commas",
-      "syntax-jsx",
-      "transform-react-jsx"
-    ]
-  },
-  "browserify": {
-    "transform": ["babelify"]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "lint": "eslint src"
   },
   "now": {
     "alias": "stephensorensen.com"
@@ -72,15 +29,30 @@
       "git add"
     ]
   },
-  "pre-commit": "lint:staged",
-  "dependencies": {
-    "express": "^4.16.2",
-    "node-fetch": "^1.7.3",
-    "ramda": "^0.24.1",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
-  },
   "engines": {
-    "node": "8.7.x"
+    "node": "9.x.x"
+  },
+  "dependencies": {
+    "date-fns": "^1.29.0",
+    "parcel-bundler": "^1.6.2",
+    "postcss-cssnext": "^3.0.2",
+    "ramda": "^0.25.0",
+    "react": "^16.3.0-alpha.3",
+    "react-dom": "^16.3.0-alpha.3",
+    "uuid": "^3.2.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }

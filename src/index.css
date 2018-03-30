@@ -1,0 +1,13 @@
+@import url('./Desktop.css');
+@import url('./widgets/Window.css');
+@import url('./svg/SvgCloseIcon.css');
+@import url('./svg/SvgProgManIcon.css');
+@import url('./svg/SvgTicTacToeIcon.css');
+@import url('./widgets/Icon.css');
+@import url('./widgets/IconGrid.css');
+@import url('./apps/TaskBar.css');
+
+:root {
+  font-size: 0.75em;
+  font-family: Arial, Helvetica, sans-serif;
+}

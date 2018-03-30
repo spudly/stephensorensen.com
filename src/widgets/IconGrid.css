@@ -1,0 +1,11 @@
+.icon-grid {
+  background: white;
+  overflow: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  user-select: none;
+}
