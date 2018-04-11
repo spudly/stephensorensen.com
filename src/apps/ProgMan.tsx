@@ -1,32 +1,27 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import Window from '../widgets/Window';
 import IconGrid from '../widgets/IconGrid';
 import Icon from '../widgets/Icon';
-import OsContext from '../OsContext';
+import OsContext, {OsContextValues} from '../OsContext';
 
-type Props = {
-  id: string,
-};
+interface Props {
+  id: string;
+}
 
-type State = {
-  selected: string[],
-};
+interface State {
+  selected: string[];
+}
 
 class ProgMan extends React.Component<Props, State> {
-  state = {selected: []};
+  state: State = {selected: []};
 
   render() {
     const {props: {id}, state: {selected}} = this;
     return (
       <OsContext.Consumer>
-        {({apps, killProcess}) => (
-          <Window
-            title="Program Manager"
-            close={() => {
-              killProcess(id);
-            }}
-          >
+        {({apps, killProcess}: OsContextValues) => (
+          <Window title="Program Manager" close={() => killProcess(id)}>
             <IconGrid select={keys => this.setState({selected: keys})}>
               {apps
                 .filter(app => !!app.icon)
@@ -35,7 +30,7 @@ class ProgMan extends React.Component<Props, State> {
                   <Icon
                     key={app.name}
                     name={app.name}
-                    icon={<app.icon />}
+                    icon={app.icon ? <app.icon /> : null}
                     select={() => this.setState({selected: [app.name]})}
                     isSelected={selected.includes(app.name)}
                   />

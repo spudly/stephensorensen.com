@@ -1,22 +1,23 @@
 // @flow
-import React from 'react';
-import format from 'date-fns/format';
+import * as React from 'react';
+import * as format from 'date-fns/format';
 
 type Props = {
-  format: string,
+  format: string;
 };
 
 type State = {
-  date: Date,
+  date: Date;
 };
 
 class Clock extends React.Component<Props, State> {
   state = {
     date: new Date(),
   };
+  intervalId: number | undefined;
 
   componentDidMount() {
-    this.intervalId = setInterval(() => this.setState({date: new Date()}), 100);
+    this.intervalId = window.setInterval(() => this.setState({date: new Date()}), 100);
   }
 
   componentWillUnmount() {

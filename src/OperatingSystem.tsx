@@ -1,33 +1,34 @@
-// @flow
-import React from 'react';
-import uniqueId from 'uuid/v4';
+import * as React from 'react';
+import * as uniqueId from 'uuid/v4';
 import Desktop from './Desktop';
 import Processes from './Processes';
 import TaskBar from './apps/TaskBar';
 import ProgMan from './apps/ProgMan';
 import ProgManIcon from './svg/SvgProgManIcon';
 import TicTacToe from './apps/TicTacToe';
-import type {ProcessDescriptor, WindowDescriptor, AppDescriptor} from './types';
-import OsContext, {type OsContextValues} from './OsContext';
+import Calc from './apps/Calc';
+import {ProcessDescriptor, WindowDescriptor, AppDescriptor} from './types';
+import OsContext, {OsContextValues} from './OsContext';
 import TicTacToeIcon from './svg/SvgTicTacToeIcon';
 
-type Props = {};
+interface Props {}
 
-type State = {
-  processes: ProcessDescriptor[],
-  windows: WindowDescriptor[],
-  apps: AppDescriptor[],
-};
+interface State {
+  processes: ProcessDescriptor[];
+  windows: WindowDescriptor[];
+  apps: AppDescriptor[];
+}
 
 let nextWindowZ = 0;
 
 class OperatingSystem extends React.Component<Props, State> {
-  state = {
+  state: State = {
     apps: [
       {name: 'Desktop', component: Desktop},
       {name: 'TaskBar', component: TaskBar},
       {name: 'TicTacToe', icon: TicTacToeIcon, component: TicTacToe},
       {name: 'ProgMan', icon: ProgManIcon, component: ProgMan},
+      {name: 'Calculator', icon: ProgManIcon, component: Calc},
     ],
     processes: [
       {id: uniqueId(), app: 'Desktop'},
@@ -45,22 +46,19 @@ class OperatingSystem extends React.Component<Props, State> {
       }
       return maxWin;
     }, windows[0]);
+    const context: OsContextValues = {
+      ...this.state,
+      focusedWindowId: focusedWindow ? focusedWindow.id : null,
+      spawnProcess: this._spawnProcess,
+      killProcess: this._killProcess,
+      onWindowMount: this._handleWindowMount,
+      onWindowUnmount: this._handleWindowUnmount,
+      onWindowFocus: this._handleWindowFocus,
+      getWindowZ: this._getWindowZ,
+      setWindowTitle: this._setWindowTitle,
+    };
     return (
-      <OsContext.Provider
-        value={
-          ({
-            ...this.state,
-            focusedWindowId: focusedWindow ? focusedWindow.id : null,
-            spawnProcess: this._spawnProcess,
-            killProcess: this._killProcess,
-            onWindowMount: this._handleWindowMount,
-            onWindowUnmount: this._handleWindowUnmount,
-            onWindowFocus: this._handleWindowFocus,
-            getWindowZ: this._getWindowZ,
-            setWindowTitle: this._setWindowTitle,
-          }: OsContextValues)
-        }
-      >
+      <OsContext.Provider value={context}>
         <Processes />
       </OsContext.Provider>
     );
@@ -118,7 +116,6 @@ class OperatingSystem extends React.Component<Props, State> {
     if (win) {
       return win.z;
     }
-    return null;
   };
 }
 

@@ -1,6 +1,5 @@
-// @flow
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import OperatingSystem from './OperatingSystem';
 
 if (typeof document === 'undefined') {

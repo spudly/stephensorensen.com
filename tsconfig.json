@@ -1,5 +1,15 @@
 {
+  "include": ["src/**/*"],
   "compilerOptions": {
-    "target": "esnext"
-  }
+    "target": "es5",
+    "checkJs": true,
+    "jsx": "react",
+    "module": "commonjs",
+    "allowJs": true,
+    "outDir": "build",
+    "jsxFactory": "React.createElement",
+    "alwaysStrict": true,
+    "strict": true
+  },
+  "compileOnSave": false
 }

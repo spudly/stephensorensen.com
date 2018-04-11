@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 const ProgManIcon = () => (
   <svg viewBox="0 0 32 32" className="progman-icon">

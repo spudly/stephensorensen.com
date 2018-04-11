@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 const CloseIcon = () => (
   <svg viewBox="0 0 16 16" className="close-icon">

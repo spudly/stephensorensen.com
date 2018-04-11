@@ -1,11 +1,11 @@
 // @flow
-import React, {type Node} from 'react';
+import * as React from 'react';
 
 type Props = {
-  children: Node,
-  width?: number,
-  height?: number,
-  select: (keys: string[]) => void,
+  children: React.ReactNode;
+  width?: number;
+  height?: number;
+  select: (keys: string[]) => void;
 };
 
 const IconGrid = ({children, width, height, select}: Props) => (

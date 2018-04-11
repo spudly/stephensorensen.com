@@ -1,29 +1,31 @@
 // @flow
-import React, {type Element, type Node} from 'react';
+import * as React from 'react';
+
+interface RenderPropProps {
+  left: number;
+  top: number;
+  connectDragTarget: (element: React.ReactElement<any>) => React.ReactElement<any>;
+}
 
 type Props = {
-  startLeft: number,
-  startTop: number,
-  render: (arg: {
-    left: number,
-    top: number,
-    connectDragTarget: (element: Element<any>) => Element<any>,
-  }) => Node,
+  startLeft: number;
+  startTop: number;
+  render: (arg: RenderPropProps) => React.ReactNode;
 };
 
 type State = {
-  left: number,
-  top: number,
-  dragging: ?{
-    startTop: number,
-    startLeft: number,
-    startX: number,
-    startY: number,
-  },
+  left: number;
+  top: number;
+  dragging: {
+    startTop: number;
+    startLeft: number;
+    startX: number;
+    startY: number;
+  } | null;
 };
 
 class Movable extends React.Component<Props, State> {
-  state = {
+  state: State = {
     left: this.props.startLeft,
     top: this.props.startTop,
     dragging: null,
@@ -40,16 +42,18 @@ class Movable extends React.Component<Props, State> {
   }
 
   render() {
-    return this.props.render({
-      ...this.state,
-      connectDragTarget: element =>
+    const renderPropProps: RenderPropProps = {
+      left: this.state.left,
+      top: this.state.top,
+      connectDragTarget: (element: React.ReactElement<any>) =>
         React.cloneElement(element, {
           onMouseDown: this._handleMouseDown,
         }),
-    });
+    };
+    return this.props.render(renderPropProps);
   }
 
-  _handleMouseDown = (event: SyntheticMouseEvent<HTMLElement>) => {
+  _handleMouseDown = (event: React.MouseEvent<HTMLElement>) => {
     this.setState({
       dragging: {
         startX: event.clientX,
@@ -60,18 +64,17 @@ class Movable extends React.Component<Props, State> {
     });
   };
 
-  _handleMouseMove = (event: SyntheticMouseEvent<HTMLElement>) => {
+  _handleMouseMove = (event: MouseEvent) => {
     const {dragging} = this.state;
-    if (!dragging) {
-      return;
+    if (dragging) {
+      this.setState({
+        top: dragging.startTop + (event.clientY - dragging.startY),
+        left: dragging.startLeft + (event.clientX - dragging.startX),
+      });
     }
-    this.setState({
-      top: dragging.startTop + (event.clientY - dragging.startY),
-      left: dragging.startLeft + (event.clientX - dragging.startX),
-    });
   };
 
-  _handleMouseUp = (event: SyntheticMouseEvent<HTMLElement>) => {
+  _handleMouseUp = (event: MouseEvent) => {
     const {dragging} = this.state;
     if (!dragging) {
       return;

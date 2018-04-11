@@ -1,21 +1,21 @@
 // @flow
-import React, {type Node} from 'react';
-import uniqueId from 'uuid/v4';
+import * as React from 'react';
+import * as uniqueId from 'uuid/v4';
 import Movable from './Movable';
 import CloseIcon from '../svg/SvgCloseIcon';
-import OsContext from '../OsContext';
+import OsContext, {OsContextValues} from '../OsContext';
 import Component from './Component';
 
 type Props = {
-  children: Node,
-  close: () => void,
-  title: string,
+  children: React.ReactNode;
+  close: () => void;
+  title: string;
 };
 
 type State = {
-  id: string,
-  width: number,
-  height: number,
+  id: string;
+  width: number;
+  height: number;
 };
 
 class Window extends React.Component<Props, State> {
@@ -36,12 +36,12 @@ class Window extends React.Component<Props, State> {
           onWindowUnmount,
           getWindowZ,
           setWindowTitle,
-        }) => (
+        }: OsContextValues) => (
           <Component
             {...this.props}
             didMount={() => onWindowMount(id, title)}
             willUnmount={() => onWindowUnmount(id)}
-            didUpdate={prevProps => {
+            didUpdate={(prevProps: Props) => {
               if (prevProps.title !== title) {
                 setWindowTitle(id, title);
               }

@@ -15,25 +15,20 @@ describe('generateAst', () => {
   test('2 + 2 / 2 * 2 - 2', () => {
     expect(generateAst([2, '+', 2, '/', 2, '*', 2, '-', 2])).toEqual({
       type: 'subtract',
-      values: [
-        {
-          type: 'add',
-          values: [
-            {type: 'number', value: 2},
-            {
-              type: 'multiply',
-              values: [
-                {
-                  type: 'divide',
-                  values: [{type: 'number', value: 2}, {type: 'number', value: 2}],
-                },
-                {type: 'number', value: 2},
-              ],
-            },
-          ],
+      left: {
+        type: 'add',
+        left: {type: 'number', value: 2},
+        right: {
+          type: 'multiply',
+          left: {
+            type: 'divide',
+            left: {type: 'number', value: 2},
+            right: {type: 'number', value: 2},
+          },
+          right: {type: 'number', value: 2},
         },
-        {type: 'number', value: 2},
-      ],
+      },
+      right: {type: 'number', value: 2},
     });
   });
 
@@ -43,7 +38,8 @@ describe('generateAst', () => {
       type: 'group',
       value: {
         type: 'add',
-        values: [{type: 'number', value: 2}, {type: 'number', value: 2}],
+        left: {type: 'number', value: 2},
+        right: {type: 'number', value: 2},
       },
     });
   });
@@ -52,16 +48,15 @@ describe('generateAst', () => {
     const tokens = ['(', 2, '+', 2, ')', '*', 2];
     expect(generateAst(tokens)).toEqual({
       type: 'multiply',
-      values: [
-        {
-          type: 'group',
-          value: {
-            type: 'add',
-            values: [{type: 'number', value: 2}, {type: 'number', value: 2}],
-          },
+      left: {
+        type: 'group',
+        value: {
+          type: 'add',
+          left: {type: 'number', value: 2},
+          right: {type: 'number', value: 2},
         },
-        {type: 'number', value: 2},
-      ],
+      },
+      right: {type: 'number', value: 2},
     });
   });
 
@@ -70,16 +65,15 @@ describe('generateAst', () => {
     const ast = generateAst(tokens);
     expect(ast).toEqual({
       type: 'multiply',
-      values: [
-        {type: 'number', value: 2},
-        {
-          type: 'group',
-          value: {
-            type: 'add',
-            values: [{type: 'number', value: 2}, {type: 'number', value: 2}],
-          },
+      left: {type: 'number', value: 2},
+      right: {
+        type: 'group',
+        value: {
+          type: 'add',
+          left: {type: 'number', value: 2},
+          right: {type: 'number', value: 2},
         },
-      ],
+      },
     });
   });
 
@@ -87,28 +81,26 @@ describe('generateAst', () => {
     const tokens = ['(', 2, '+', 2, ')', '/', 2, '*', '(', 2, '-', 2, ')'];
     expect(generateAst(tokens)).toEqual({
       type: 'multiply',
-      values: [
-        {
-          type: 'divide',
-          values: [
-            {
-              type: 'group',
-              value: {
-                type: 'add',
-                values: [{type: 'number', value: 2}, {type: 'number', value: 2}],
-              },
-            },
-            {type: 'number', value: 2},
-          ],
-        },
-        {
+      left: {
+        type: 'divide',
+        left: {
           type: 'group',
           value: {
-            type: 'subtract',
-            values: [{type: 'number', value: 2}, {type: 'number', value: 2}],
+            type: 'add',
+            left: {type: 'number', value: 2},
+            right: {type: 'number', value: 2},
           },
         },
-      ],
+        right: {type: 'number', value: 2},
+      },
+      right: {
+        type: 'group',
+        value: {
+          type: 'subtract',
+          left: {type: 'number', value: 2},
+          right: {type: 'number', value: 2},
+        },
+      },
     });
   });
 });

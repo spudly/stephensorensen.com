@@ -1,19 +1,19 @@
 // @flow
-import React, {type Node} from 'react';
-import assocPath from 'ramda/src/assocPath';
+import * as React from 'react';
+import {assocPath} from 'ramda';
 import Window from '../widgets/Window';
-import OsContext from '../OsContext';
+import OsContext, {OsContextValues} from '../OsContext';
 
 export const PLAYER_X = 1;
 export const PLAYER_O = -1;
 
-const Center = ({children, style}: {children: Node, style: Object}) => (
+const Center = ({children, style}: {children: React.ReactNode; style: Object}) => (
   <div style={{...style, display: 'grid', placeItems: 'center'}}>{children}</div>
 );
 
 type Props = {
-  width?: number,
-  height?: number,
+  width?: number;
+  height?: number;
 };
 
 type BoardValue = -1 | 0 | 1;
@@ -21,10 +21,10 @@ type BoardRow = [BoardValue, BoardValue, BoardValue];
 type Board = [BoardRow, BoardRow, BoardRow];
 
 type State = {
-  board: Board,
-  player: -1 | 1,
-  winner: -1 | 1 | null,
-  blackout: boolean,
+  board: Board;
+  player: -1 | 1;
+  winner: -1 | 1 | null;
+  blackout: boolean;
 };
 
 class TicTacToe extends React.Component<Props, State> {
@@ -95,7 +95,7 @@ class TicTacToe extends React.Component<Props, State> {
     return `${top}px ${right}px ${bottom}px ${left}px`;
   }
 
-  _handleRegionClick = (rowIndex, colIndex) => () => {
+  _handleRegionClick = (rowIndex: number, colIndex: number) => () => {
     const {state: {board, player}} = this;
     if (board[rowIndex][colIndex] !== 0) {
       return;
@@ -103,7 +103,7 @@ class TicTacToe extends React.Component<Props, State> {
 
     const newBoard = assocPath([rowIndex, colIndex], player, board);
     const winner = this._findWinner(newBoard);
-    const blackout = newBoard.every(row => row.every(value => value !== 0));
+    const blackout = newBoard.every((row: BoardRow) => row.every(value => value !== 0));
     this.setState({
       board: newBoard,
       player: player === PLAYER_X ? PLAYER_O : PLAYER_X,
@@ -125,7 +125,7 @@ class TicTacToe extends React.Component<Props, State> {
     };
   }
 
-  _findWinner(rows) {
+  _findWinner(rows: Board) {
     const sums = Array(8).fill(0);
     rows.forEach((row, rowIndex) =>
       row.forEach((value, colIndex) => {
@@ -151,7 +151,7 @@ class TicTacToe extends React.Component<Props, State> {
 
 const TicTacToeProcess = ({id}: {id: string}) => (
   <OsContext.Consumer>
-    {({killProcess}) => (
+    {({killProcess}: OsContextValues) => (
       <Window title="Tic Tac Toe" close={() => killProcess(id)}>
         <div style={{padding: 10}}>
           <TicTacToe />

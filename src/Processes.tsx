@@ -1,10 +1,9 @@
-// @flow
-import React from 'react';
-import OsContext from './OsContext';
+import * as React from 'react';
+import OsContext, {OsContextValues} from './OsContext';
 
 const Processes = () => (
   <OsContext.Consumer>
-    {({processes, apps}) =>
+    {({processes, apps}: OsContextValues) =>
       processes.map(process => {
         const app = apps.find(({name}) => name === process.app);
         if (!app) {

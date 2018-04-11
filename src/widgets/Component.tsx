@@ -1,9 +1,9 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 
 const noop = () => {};
 
-class Component extends React.Component<*> {
+class Component extends React.Component<any> {
   static defaultProps = {
     didMount: noop,
     didUpdate: noop,

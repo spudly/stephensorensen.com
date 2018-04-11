@@ -1,17 +1,17 @@
 // @flow
-import React, {type Element} from 'react';
-import OsContext from '../OsContext';
+import * as React from 'react';
+import OsContext, {OsContextValues} from '../OsContext';
 
 type Props = {
-  name: string,
-  isSelected: boolean,
-  icon: Element<any>,
-  select: (names: string[]) => void,
+  name: string;
+  isSelected: boolean;
+  icon: React.ReactElement<any> | null;
+  select: (names: string[]) => void;
 };
 
 const Icon = ({name, select, isSelected, icon}: Props) => (
   <OsContext.Consumer>
-    {({spawnProcess}) => (
+    {({spawnProcess}: OsContextValues) => (
       <button
         onClick={() => select([name])}
         onDoubleClick={() => spawnProcess(name)}

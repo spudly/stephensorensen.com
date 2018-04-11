@@ -3,24 +3,11 @@ interface NumberExpression {
   value: number;
 }
 
-interface AddExpression {
-  type: 'add';
-  values: [Expression, Expression];
+interface BinaryExpression {
+  type: 'add' | 'subtract' | 'multiply' | 'divide';
+  left: Expression;
+  right: Expression;
 }
-interface SubtractExpression {
-  type: 'subtract';
-  values: [Expression, Expression];
-}
-interface MultiplyExpression {
-  type: 'multiply';
-  values: [Expression, Expression];
-}
-interface DivideExpression {
-  type: 'divide';
-  values: [Expression, Expression];
-}
-
-type BinaryExpression = AddExpression | SubtractExpression | MultiplyExpression | DivideExpression;
 
 interface GroupExpression {
   type: 'group';
@@ -29,11 +16,32 @@ interface GroupExpression {
 
 type Expression = NumberExpression | BinaryExpression | GroupExpression;
 
+type OperatorChar = '+' | '-' | '*' | '/' | '(' | ')';
+type OperatorType = 'multiply' | 'divide' | 'add' | 'subtract';
+
+interface OperatorMap {
+  [token: string]: OperatorType;
+}
+
+type Token = number | string;
+
 const builders = {
-  add: (values: [Expression, Expression]): AddExpression => ({type: 'add', values}),
-  subtract: (values: [Expression, Expression]): SubtractExpression => ({type: 'subtract', values}),
-  multiply: (values: [Expression, Expression]): MultiplyExpression => ({type: 'multiply', values}),
-  divide: (values: [Expression, Expression]): DivideExpression => ({type: 'divide', values}),
+  add: (left: Expression, right: Expression): BinaryExpression => ({type: 'add', left, right}),
+  subtract: (left: Expression, right: Expression): BinaryExpression => ({
+    type: 'subtract',
+    left,
+    right,
+  }),
+  multiply: (left: Expression, right: Expression): BinaryExpression => ({
+    type: 'multiply',
+    left,
+    right,
+  }),
+  divide: (left: Expression, right: Expression): BinaryExpression => ({
+    type: 'divide',
+    left,
+    right,
+  }),
   number: (value: number): NumberExpression => ({type: 'number', value}),
   group: (value: Expression): GroupExpression => ({type: 'group', value}),
 };
@@ -65,15 +73,21 @@ export const generateTokens = function* generateTokens(expression: string) {
   }
 };
 
-const operatorTypesByPrecedence = [{'*': 'multiply', '/': 'divide'}, {'+': 'add', '-': 'subtract'}];
+const operatorTypesByPrecedence: Array<OperatorMap> = [
+  {'*': 'multiply', '/': 'divide'},
+  {'+': 'add', '-': 'subtract'},
+];
 
-export const generateAst = tokens => {
-  if (tokens.type) {
-    return tokens;
-  }
-
-  if (typeof tokens === 'number') {
-    return builders.number(tokens);
+export const generateAst = (tokens: Array<Token | Expression>): Expression => {
+  if (tokens.length === 1) {
+    const token = tokens[0];
+    if (typeof token === 'number') {
+      return builders.number(token);
+    }
+    if (typeof token === 'string') {
+      throw new Error('Unable to resolve expression');
+    }
+    return token;
   }
 
   if (tokens.includes(')')) {
@@ -87,25 +101,31 @@ export const generateAst = tokens => {
   }
 
   const newTokens = operatorTypesByPrecedence.reduce((curTokens, operators) => {
-    let type;
-    const reduced = curTokens.reduce((chunk, token) => {
-      if (operators[token]) {
-        type = operators[token];
-        return chunk;
-      }
-      if (type) {
-        const prevTokens = chunk.slice(0, chunk.length - 1);
-        const a = generateAst(chunk[chunk.length - 1]);
-        const b = generateAst(token);
-        const newChunks = [...prevTokens, builders[type]([a, b])];
-        type = null;
-        return newChunks;
-      }
-      if (typeof token === 'number') {
-        return [...chunk, builders.number(token)];
-      }
-      return [...chunk, isOperator(token) ? token : generateAst(token)];
-    }, []);
+    let type: OperatorType | null;
+    const reduced = curTokens.reduce(
+      (chunk: Array<Token | Expression>, token: Token | Expression) => {
+        if (typeof token === 'string' && operators[token]) {
+          type = operators[token];
+          return chunk;
+        }
+        if (type) {
+          const prevTokens = chunk.slice(0, chunk.length - 1);
+          const a = generateAst([chunk[chunk.length - 1]]);
+          const b = generateAst([token]);
+          const newChunks = [...prevTokens, builders[type](a, b)];
+          type = null;
+          return newChunks;
+        }
+        if (typeof token === 'number') {
+          return [...chunk, builders.number(token)];
+        }
+        return [
+          ...chunk,
+          typeof token === 'string' && isOperator(token) ? token : generateAst([token]),
+        ];
+      },
+      []
+    );
     return reduced;
   }, tokens);
 
@@ -113,19 +133,25 @@ export const generateAst = tokens => {
     throw new Error('unable to resolve calculation');
   }
 
-  return newTokens[0];
+  const newToken = newTokens[0];
+
+  if (typeof newToken === 'string' || typeof newToken === 'number') {
+    throw new Error('fail');
+  }
+
+  return newToken;
 };
 
-const evaluate = (ast: Expression) => {
+const evaluate = (ast: Expression): number => {
   switch (ast.type) {
     case 'add':
-      return evaluate(ast.values[0]) + evaluate(ast.values[1]);
+      return evaluate(ast.left) + evaluate(ast.right);
     case 'subtract':
-      return evaluate(ast.values[0]) - evaluate(ast.values[1]);
+      return evaluate(ast.left) - evaluate(ast.right);
     case 'multiply':
-      return evaluate(ast.values[0]) * evaluate(ast.values[1]);
+      return evaluate(ast.left) * evaluate(ast.right);
     case 'divide':
-      return evaluate(ast.values[0]) / evaluate(ast.values[1]);
+      return evaluate(ast.left) / evaluate(ast.right);
     case 'group':
       return evaluate(ast.value);
     case 'number':
@@ -133,8 +159,8 @@ const evaluate = (ast: Expression) => {
   }
 };
 
-export default expression => {
-  const tokens = Array.from(generateTokens(expression));
+export default (expression: string) => {
+  const tokens: Token[] = Array.from(generateTokens(expression));
   const ast = generateAst(tokens);
   return evaluate(ast);
 };
