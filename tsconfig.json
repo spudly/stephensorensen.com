@@ -9,7 +9,8 @@
     "outDir": "build",
     "jsxFactory": "React.createElement",
     "alwaysStrict": true,
-    "strict": true
+    "strict": true,
+    "lib": ["dom", "es2018", "dom.iterable"]
   },
   "compileOnSave": false
 }
