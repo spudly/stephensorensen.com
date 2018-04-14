@@ -8,7 +8,7 @@ interface OsContextValues {
   focusedWindowId: string | null;
   spawnProcess: (name: string) => void;
   killProcess: (id: string) => void;
-  onWindowMount: (id: string, title: string) => void;
+  onWindowMount: (id: string, title: string, icon: React.ComponentType<any> | undefined) => void;
   onWindowUnmount: (id: string) => void;
   onWindowFocus: (id: string) => void;
   getWindowZ: (id: string) => number | undefined;

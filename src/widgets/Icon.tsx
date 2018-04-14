@@ -4,12 +4,12 @@ import OsContext, {OsContextValues} from '../OsContext';
 
 type Props = {
   name: string;
-  isSelected: boolean;
   icon: React.ReactElement<any> | null;
-  select: (names: string[]) => void;
+  isSelected?: boolean;
+  select?: (names: string[]) => void;
 };
 
-const Icon = ({name, select, isSelected, icon}: Props) => (
+const Icon = ({name, select = () => {}, isSelected = false, icon}: Props) => (
   <OsContext.Consumer>
     {({spawnProcess}: OsContextValues) => (
       <button
@@ -26,4 +26,5 @@ const Icon = ({name, select, isSelected, icon}: Props) => (
   </OsContext.Consumer>
 );
 
+export {Props};
 export default Icon;

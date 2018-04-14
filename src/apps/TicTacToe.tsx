@@ -3,12 +3,13 @@ import * as React from 'react';
 import {assocPath} from 'ramda';
 import Window from '../widgets/Window';
 import OsContext, {OsContextValues} from '../OsContext';
+import TicTacToeIcon from '../svg/SvgTicTacToeIcon';
 
 export const PLAYER_X = 1;
 export const PLAYER_O = -1;
 
 const Center = ({children, style}: {children: React.ReactNode; style: Object}) => (
-  <div style={{...style, display: 'grid', placeItems: 'center'}}>{children}</div>
+  <div style={Object.assign({}, style, {display: 'grid', placeItems: 'center'})}>{children}</div>
 );
 
 type Props = {
@@ -152,7 +153,7 @@ class TicTacToe extends React.Component<Props, State> {
 const TicTacToeProcess = ({id}: {id: string}) => (
   <OsContext.Consumer>
     {({killProcess}: OsContextValues) => (
-      <Window title="Tic Tac Toe" close={() => killProcess(id)}>
+      <Window title="Tic Tac Toe" close={() => killProcess(id)} icon={TicTacToeIcon}>
         <div style={{padding: 10}}>
           <TicTacToe />
         </div>

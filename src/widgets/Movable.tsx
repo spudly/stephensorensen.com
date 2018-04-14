@@ -48,10 +48,38 @@ class Movable extends React.Component<Props, State> {
       connectDragTarget: (element: React.ReactElement<any>) =>
         React.cloneElement(element, {
           onMouseDown: this._handleMouseDown,
+          onTouchStart: this._handleTouchStart,
+          onTouchMove: this._handleTouchMove,
+          onTouchEnd: this._handleTouchEnd,
         }),
     };
     return this.props.render(renderPropProps);
   }
+
+  _handleTouchStart = (event: React.TouchEvent<HTMLElement>) => {
+    const touch = event.touches[0];
+    this.setState({
+      dragging: {
+        startX: touch.clientX,
+        startY: touch.clientY,
+        startTop: this.state.top,
+        startLeft: this.state.left,
+      },
+    });
+  };
+
+  _handleTouchMove = (event: React.TouchEvent<HTMLElement>) => {
+    const touch = event.touches[0];
+    const {dragging} = this.state;
+    if (dragging) {
+      this.setState({
+        top: dragging.startTop + (touch.clientY - dragging.startY),
+        left: dragging.startLeft + (touch.clientX - dragging.startX),
+      });
+    }
+  };
+
+  _handleTouchEnd = (event: React.TouchEvent<HTMLElement>) => this.setState({dragging: null});
 
   _handleMouseDown = (event: React.MouseEvent<HTMLElement>) => {
     this.setState({

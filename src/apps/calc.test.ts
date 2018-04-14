@@ -112,4 +112,8 @@ describe('calc', () => {
   test('(2 + 2) / 2 * (2 - 2)', () => {
     expect(calc('(2 + 2) / 2 * (2 - 2)')).toBe(0);
   });
+
+  test('2 * 2', () => {
+    expect(calc('2 * 2')).toBe(4);
+  })
 });

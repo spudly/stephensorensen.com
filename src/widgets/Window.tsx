@@ -10,6 +10,7 @@ type Props = {
   children: React.ReactNode;
   close: () => void;
   title: string;
+  icon?: React.ComponentType<any>;
 };
 
 type State = {
@@ -26,7 +27,7 @@ class Window extends React.Component<Props, State> {
   };
 
   render() {
-    const {props: {close, children, title}, state: {id, width, height}} = this;
+    const {props: {close, children, title, icon}, state: {id, width, height}} = this;
     return (
       <OsContext.Consumer>
         {({
@@ -39,7 +40,7 @@ class Window extends React.Component<Props, State> {
         }: OsContextValues) => (
           <Component
             {...this.props}
-            didMount={() => onWindowMount(id, title)}
+            didMount={() => onWindowMount(id, title, icon)}
             willUnmount={() => onWindowUnmount(id)}
             didUpdate={(prevProps: Props) => {
               if (prevProps.title !== title) {

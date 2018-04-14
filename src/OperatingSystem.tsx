@@ -46,8 +46,7 @@ class OperatingSystem extends React.Component<Props, State> {
       }
       return maxWin;
     }, windows[0]);
-    const context: OsContextValues = {
-      ...this.state,
+    const context: OsContextValues = Object.assign({}, this.state, {
       focusedWindowId: focusedWindow ? focusedWindow.id : null,
       spawnProcess: this._spawnProcess,
       killProcess: this._killProcess,
@@ -56,7 +55,7 @@ class OperatingSystem extends React.Component<Props, State> {
       onWindowFocus: this._handleWindowFocus,
       getWindowZ: this._getWindowZ,
       setWindowTitle: this._setWindowTitle,
-    };
+    });
     return (
       <OsContext.Provider value={context}>
         <Processes />
@@ -80,9 +79,9 @@ class OperatingSystem extends React.Component<Props, State> {
       processes: prevState.processes.filter(p => p.id !== processId),
     }));
 
-  _handleWindowMount = (id: string, title: string) =>
+  _handleWindowMount = (id: string, title: string, icon?: React.ComponentType<any> | undefined) =>
     this.setState(prevState => ({
-      windows: [...prevState.windows, {id, title, z: nextWindowZ++}],
+      windows: [...prevState.windows, {id, icon, title, z: nextWindowZ++}],
     }));
 
   _handleWindowUnmount = (id: string) =>
@@ -105,7 +104,7 @@ class OperatingSystem extends React.Component<Props, State> {
       windows: prevState.windows.map((win: WindowDescriptor) => {
         if (win.id === id) {
           // $FlowFixMe
-          return {...win, title};
+          return Object.assign({}, win, {title});
         }
         return win;
       }),

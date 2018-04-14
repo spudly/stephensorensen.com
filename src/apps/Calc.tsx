@@ -32,12 +32,15 @@ class Calc extends React.Component<Props, State> {
           }}
           onChange={e => this.setState({value: e.currentTarget.value})}
         />
-        <button type="button" onClick={() =>
-          this.setState({
-            value: this.state.value.slice(0, this.state.value.length - 1),
-          })
-        }>
-          DEL
+        <button
+          type="button"
+          onClick={() =>
+            this.setState({
+              value: this.state.value.slice(0, this.state.value.length - 1),
+            })
+          }
+        >
+          &#x2190;
         </button>
         <button type="button" onClick={this._type('7')}>
           7
@@ -60,7 +63,7 @@ class Calc extends React.Component<Props, State> {
         <button type="button" onClick={this._type('6')}>
           6
         </button>
-        <button type="button" onClick={this._type('x')}>
+        <button type="button" onClick={this._type('*')}>
           &times;
         </button>
         <button type="button" onClick={this._type('1')}>
@@ -80,10 +83,16 @@ class Calc extends React.Component<Props, State> {
         </button>
         <button type="button" onClick={this._type('0')}>
           0
-        </button>        
-        <button type="button" onClick={() => this.setState({value: String(calc(this.state.value))}}>
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            console.log(`${this.state.value} => ${calc(this.state.value)}`);
+            this.setState({value: String(calc(this.state.value))});
+          }}
+        >
           =
-        </button>        
+        </button>
         <button type="button" onClick={this._type('+')}>
           +
         </button>

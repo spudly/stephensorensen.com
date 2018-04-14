@@ -1,7 +1,11 @@
 import * as React from 'react';
 
-const ProgManIcon = () => (
-  <svg viewBox="0 0 32 32" className="progman-icon">
+interface Props {
+  size?: number;
+}
+
+const ProgManIcon = ({size = 32}: Props) => (
+  <svg viewBox="0 0 32 32" className="svg-icon progman-icon" style={{width: size, height: size}}>
     <path className="progman-icon__window" d="M 1 1 L 30 1 L 30 23 L 1 23 L 1 1" />
     <path className="progman-icon__window-title" d="M 1 1 L 30 1 L 30 5 L 1 5 L 1 1" />
     <path className="progman-icon__icon" d="M 3 7 L 6 7 L 6 10 L 3 10 L 3 7" />

@@ -1,5 +1,6 @@
 @import url('./Desktop.css');
 @import url('./widgets/Window.css');
+@import url('./svg/SvgIcon.css');
 @import url('./svg/SvgCloseIcon.css');
 @import url('./svg/SvgProgManIcon.css');
 @import url('./svg/SvgTicTacToeIcon.css');

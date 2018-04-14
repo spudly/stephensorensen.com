@@ -1,25 +1,46 @@
 // @flow
 import * as React from 'react';
+import Icon, {Props as IconProps} from './Icon';
 
-type Props = {
+interface Props {
   children: React.ReactNode;
   width?: number;
   height?: number;
-  select: (keys: string[]) => void;
-};
+}
 
-const IconGrid = ({children, width, height, select}: Props) => (
-  <div
-    className="icon-grid"
-    style={{height, width}}
-    onClick={e => {
-      if (e.target === e.currentTarget) {
-        select([]);
-      }
-    }}
-  >
-    {children}
-  </div>
-);
+interface State {
+  selected: string[];
+}
+
+class IconGrid extends React.Component<Props> {
+  state: State = {selected: []};
+
+  render() {
+    const {props: {children, width, height}, state: {selected}} = this;
+    return (
+      <div
+        className="icon-grid"
+        style={{height, width}}
+        onClick={e => {
+          if (e.target === e.currentTarget) {
+            this._select([]);
+          }
+        }}
+      >
+        {React.Children.map(children, child => {
+          if (typeof child === 'string' || typeof child === 'number') {
+            return child;
+          }
+          return React.cloneElement(child, {
+            select: () => this._select([child.props.name]),
+            isSelected: selected.includes(child.props.name),
+          });
+        })}
+      </div>
+    );
+  }
+
+  _select = (selected: string[]) => this.setState({selected});
+}
 
 export default IconGrid;
