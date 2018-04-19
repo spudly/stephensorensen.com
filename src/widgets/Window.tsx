@@ -84,7 +84,7 @@ class Window extends React.Component<Props, State> {
             <dialog
               open
               className={`window ${focusedWindowId === id ? 'window--focused' : ''}`.trim()}
-              style={{left, top, zIndex: getWindowZ(id)}}
+              style={{left, top, width, height, zIndex: getWindowZ(id)}}
               onMouseDown={() => {
                 if (focusedWindowId !== id) {
                   onWindowFocus(id);

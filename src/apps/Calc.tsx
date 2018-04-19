@@ -22,6 +22,7 @@ class Calc extends React.Component<Props, State> {
           display: 'grid',
           gridTemplateColumns: '1fr 1fr 1fr 1fr',
           gridTemplateRows: '1fr 1fr 1fr 1fr 1fr',
+          height: '100%',
         }}
       >
         <input

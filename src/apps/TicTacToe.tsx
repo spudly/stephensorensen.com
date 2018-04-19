@@ -154,9 +154,7 @@ const TicTacToeProcess = ({id}: {id: string}) => (
   <OsContext.Consumer>
     {({killProcess}: OsContextValues) => (
       <Window title="Tic Tac Toe" close={() => killProcess(id)} icon={TicTacToeIcon}>
-        <div style={{padding: 10}}>
-          <TicTacToe />
-        </div>
+        <TicTacToe />
       </Window>
     )}
   </OsContext.Consumer>
