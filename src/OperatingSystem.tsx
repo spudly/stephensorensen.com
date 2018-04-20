@@ -7,6 +7,7 @@ import ProgMan from './apps/ProgMan';
 import ProgManIcon from './svg/SvgProgManIcon';
 import TicTacToe from './apps/TicTacToe';
 import Calc from './apps/Calc';
+import Nibbles from './apps/Nibbles';
 import {ProcessDescriptor, WindowDescriptor, AppDescriptor} from './types';
 import OsContext, {OsContextValues} from './OsContext';
 import TicTacToeIcon from './svg/SvgTicTacToeIcon';
@@ -29,6 +30,7 @@ class OperatingSystem extends React.Component<Props, State> {
       {name: 'TicTacToe', icon: TicTacToeIcon, component: TicTacToe},
       {name: 'ProgMan', icon: ProgManIcon, component: ProgMan},
       {name: 'Calculator', icon: ProgManIcon, component: Calc},
+      {name: 'Nibbles', icon: TicTacToeIcon, component: Nibbles},
     ],
     processes: [
       {id: uniqueId(), app: 'Desktop'},
