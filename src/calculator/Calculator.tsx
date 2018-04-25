@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import Window from '../widgets/Window';
-import OsContext, {OsContextValues} from '../OsContext';
+import Window from '../os/Window';
+import OsContext, {OsContextValues} from '../os/OsContext';
 import calc from './calc';
 
 interface Props {}
@@ -10,7 +10,7 @@ interface State {
   value: string;
 }
 
-class Calc extends React.Component<Props, State> {
+class Calculator extends React.Component<Props, State> {
   state: State = {
     value: '',
   };
@@ -106,14 +106,14 @@ class Calc extends React.Component<Props, State> {
   };
 }
 
-const CalcProcess = ({id}: {id: string}) => (
+const CalculatorProcess = ({id}: {id: string}) => (
   <OsContext.Consumer>
     {({killProcess}: OsContextValues) => (
       <Window title="Calculator" close={() => killProcess(id)}>
-        <Calc />
+        <Calculator />
       </Window>
     )}
   </OsContext.Consumer>
 );
 
-export default CalcProcess;
+export default CalculatorProcess;

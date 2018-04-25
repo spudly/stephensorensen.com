@@ -1,12 +1,12 @@
-@import url('./Desktop.css');
-@import url('./widgets/Window.css');
-@import url('./svg/SvgIcon.css');
-@import url('./svg/SvgCloseIcon.css');
-@import url('./svg/SvgProgManIcon.css');
-@import url('./svg/SvgTicTacToeIcon.css');
-@import url('./widgets/Icon.css');
-@import url('./widgets/IconGrid.css');
-@import url('./apps/TaskBar.css');
+@import url('./explorer/Desktop.css');
+@import url('./os/Window.css');
+@import url('./os/SvgIcon.css');
+@import url('./os/SvgCloseIcon.css');
+@import url('./explorer/SvgProgManIcon.css');
+@import url('./tictactoe/SvgTicTacToeIcon.css');
+@import url('./explorer/Icon.css');
+@import url('./explorer/IconGrid.css');
+@import url('./taskbar/TaskBar.css');
 
 :root {
   font-size: 0.75em;

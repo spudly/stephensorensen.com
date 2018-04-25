@@ -1,21 +1,21 @@
 // @flow
 import * as React from 'react';
 import * as uniqueId from 'uuid/v4';
-import CloseIcon from '../svg/SvgCloseIcon';
-import OsContext, {OsContextValues} from '../OsContext';
+import CloseIcon from './SvgCloseIcon';
+import OsContext, {OsContextValues, withContext} from './OsContext';
 import Component from './Component';
 
-type Props = {
+interface Props {
   children: React.ReactNode;
   close: () => void;
   title: string;
   icon?: React.ComponentType<any>;
-};
+}
 
 type Direction = 'n' | 'e' | 's' | 'w' | 'nw' | 'ne' | 'se' | 'sw';
 const directions: Direction[] = ['n', 'e', 's', 'w', 'nw', 'ne', 'se', 'sw'];
 
-type State = {
+interface State {
   id: string;
   width: number;
   height: number;
@@ -36,9 +36,9 @@ type State = {
     startWidth: number;
     startHeight: number;
   } | null;
-};
+}
 
-class Window extends React.Component<Props, State> {
+class Window extends React.Component<Props & OsContextValues, State> {
   state: State = {
     id: uniqueId(),
     width: 500, // TODO: get initial width/height from props
@@ -50,11 +50,20 @@ class Window extends React.Component<Props, State> {
   };
 
   componentDidMount() {
+    const {props: {title, icon, onWindowMount}, state: {id}} = this;
+    onWindowMount(id, title, icon);
     window.addEventListener('mousemove', this._handleMouseMove);
     window.addEventListener('mouseup', this._handleMoveEnd);
   }
 
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.title !== this.props.title) {
+      this.props.setWindowTitle(this.state.id, this.props.title);
+    }
+  }
+
   componentWillUnmount() {
+    this.props.onWindowUnmount(this.state.id);
     window.removeEventListener('mousemove', this._handleMouseMove);
     window.removeEventListener('mouseup', this._handleMoveEnd);
   }
@@ -62,67 +71,45 @@ class Window extends React.Component<Props, State> {
   render() {
     const {props: {close, children, title, icon}, state: {id, width, height, left, top}} = this;
     return (
-      <OsContext.Consumer>
-        {({
-          onWindowFocus,
-          focusedWindowId,
-          onWindowMount,
-          onWindowUnmount,
-          getWindowZ,
-          setWindowTitle,
-        }: OsContextValues) => (
-          <Component
-            {...this.props}
-            didMount={() => onWindowMount(id, title, icon)}
-            willUnmount={() => onWindowUnmount(id)}
-            didUpdate={(prevProps: Props) => {
-              if (prevProps.title !== title) {
-                setWindowTitle(id, title);
-              }
-            }}
+      <dialog
+        open
+        className={`window ${this.props.focusedWindowId === id ? 'window--focused' : ''}`.trim()}
+        style={{left, top, width, height, zIndex: this.props.getWindowZ(id)}}
+        onMouseDown={() => {
+          if (this.props.focusedWindowId !== id) {
+            this.props.onWindowFocus(id);
+          }
+        }}
+      >
+        {React.cloneElement(React.Children.only(children), {width, height})}
+
+        {directions.map(direction => (
+          <div
+            key={direction}
+            className={`window__resize window__resize--${direction}`}
+            draggable={false}
+            {...this._getResizeEventHandlers(direction)}
+          />
+        ))}
+
+        <header className="window__header">
+          <button className="window__header-button" onClick={() => close()}>
+            <CloseIcon />
+          </button>
+          <h1
+            className="window__header-text"
+            onMouseDown={this._handleHeaderMouseDown}
+            onTouchStart={this._handleHeaderTouchStart}
+            onTouchMove={this._handleTouchMove}
+            onTouchEnd={this._handleMoveEnd}
+            draggable={false}
           >
-            <dialog
-              open
-              className={`window ${focusedWindowId === id ? 'window--focused' : ''}`.trim()}
-              style={{left, top, width, height, zIndex: getWindowZ(id)}}
-              onMouseDown={() => {
-                if (focusedWindowId !== id) {
-                  onWindowFocus(id);
-                }
-              }}
-            >
-              {React.cloneElement(React.Children.only(children), {width, height})}
-
-              {directions.map(direction => (
-                <div
-                  key={direction}
-                  className={`window__resize window__resize--${direction}`}
-                  draggable={false}
-                  {...this._getResizeEventHandlers(direction)}
-                />
-              ))}
-
-              <header className="window__header">
-                <button className="window__header-button" onClick={() => close()}>
-                  <CloseIcon />
-                </button>
-                <h1
-                  className="window__header-text"
-                  onMouseDown={this._handleHeaderMouseDown}
-                  onTouchStart={this._handleHeaderTouchStart}
-                  onTouchMove={this._handleTouchMove}
-                  onTouchEnd={this._handleMoveEnd}
-                  draggable={false}
-                >
-                  {title}
-                </h1>
-                {/* <button style={{margin: 0, padding: 0, fontSize: 'inherit'}}>_</button> */}
-                {/* <button style={{margin: 0, padding: 0, fontSize: 'inherit'}}>[]</button> */}
-              </header>
-            </dialog>
-          </Component>
-        )}
-      </OsContext.Consumer>
+            {title}
+          </h1>
+          {/* <button style={{margin: 0, padding: 0, fontSize: 'inherit'}}>_</button> */}
+          {/* <button style={{margin: 0, padding: 0, fontSize: 'inherit'}}>[]</button> */}
+        </header>
+      </dialog>
     );
   }
 
@@ -244,4 +231,4 @@ class Window extends React.Component<Props, State> {
   };
 }
 
-export default Window;
+export default withContext(Window);

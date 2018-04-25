@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import OsContext, {OsContextValues} from '../OsContext';
+import OsContext, {OsContextValues} from '../os/OsContext';
 
 type Props = {
   name: string;

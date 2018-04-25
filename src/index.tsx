@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import OperatingSystem from './OperatingSystem';
+import OperatingSystem from './os/OperatingSystem';
 
 if (typeof document === 'undefined') {
   throw new Error('No Document!?');

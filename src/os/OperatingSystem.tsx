@@ -1,16 +1,20 @@
 import * as React from 'react';
 import * as uniqueId from 'uuid/v4';
-import Desktop from './Desktop';
+import Desktop from '../explorer/Desktop';
 import Processes from './Processes';
-import TaskBar from './apps/TaskBar';
-import ProgMan from './apps/ProgMan';
-import ProgManIcon from './svg/SvgProgManIcon';
-import TicTacToe from './apps/TicTacToe';
-import Calc from './apps/Calc';
-import Nibbles from './apps/Nibbles';
-import {ProcessDescriptor, WindowDescriptor, AppDescriptor} from './types';
-import OsContext, {OsContextValues} from './OsContext';
-import TicTacToeIcon from './svg/SvgTicTacToeIcon';
+import TaskBar from '../taskbar/TaskBar';
+import ProgMan from '../explorer/ProgMan';
+import ProgManIcon from '../explorer/SvgProgManIcon';
+import TicTacToe from '../tictactoe/TicTacToe';
+import Calculator from '../calculator/Calculator';
+import Nibbles from '../nibbles/Nibbles';
+import OsContext, {
+  OsContextValues,
+  ProcessDescriptor,
+  WindowDescriptor,
+  AppDescriptor,
+} from './OsContext';
+import TicTacToeIcon from '../tictactoe/SvgTicTacToeIcon';
 
 interface Props {}
 
@@ -29,7 +33,7 @@ class OperatingSystem extends React.Component<Props, State> {
       {name: 'TaskBar', component: TaskBar},
       {name: 'TicTacToe', icon: TicTacToeIcon, component: TicTacToe},
       {name: 'ProgMan', icon: ProgManIcon, component: ProgMan},
-      {name: 'Calculator', icon: ProgManIcon, component: Calc},
+      {name: 'Calculator', icon: ProgManIcon, component: Calculator},
       {name: 'Nibbles', icon: TicTacToeIcon, component: Nibbles},
     ],
     processes: [

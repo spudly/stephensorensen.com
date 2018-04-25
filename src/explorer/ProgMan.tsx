@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
-import Window from '../widgets/Window';
-import IconGrid from '../widgets/IconGrid';
-import Icon from '../widgets/Icon';
-import OsContext, {OsContextValues} from '../OsContext';
-import ProgManIcon from '../svg/SvgProgManIcon';
+import Window from '../os/Window';
+import IconGrid from './IconGrid';
+import Icon from './Icon';
+import OsContext, {OsContextValues} from '../os/OsContext';
+import ProgManIcon from './SvgProgManIcon';
 
 interface Props {
   id: string;

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Icon from './widgets/Icon';
-import IconGrid from './widgets/IconGrid';
-import ProgManIcon from './svg/SvgProgManIcon';
+import Icon from './Icon';
+import IconGrid from './IconGrid';
+import ProgManIcon from './SvgProgManIcon';
 
 const Desktop = () => (
   <div className="desktop">

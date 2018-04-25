@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
 import {assocPath} from 'ramda';
-import Window from '../widgets/Window';
-import OsContext, {OsContextValues} from '../OsContext';
-import TicTacToeIcon from '../svg/SvgTicTacToeIcon';
+import Window from '../os/Window';
+import OsContext, {OsContextValues} from '../os/OsContext';
+import TicTacToeIcon from './SvgTicTacToeIcon';
 
 export const PLAYER_X = 1;
 export const PLAYER_O = -1;

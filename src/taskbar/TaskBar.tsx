@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
-import OsContext, {OsContextValues} from '../OsContext';
-import Clock from '../widgets/Clock';
+import OsContext, {OsContextValues} from '../os/OsContext';
+import Clock from './Clock';
 
 const TaskBar = () => (
   <OsContext.Consumer>
@@ -9,7 +9,7 @@ const TaskBar = () => (
       <div className="taskbar">
         <button style={{display: 'block'}}>s:OS</button>
         <div style={{background: '#ccc', textAlign: 'right', padding: '0.5em'}}>
-          <Clock format="h:mm A" />
+          <Clock format="h:mm:ss A" />
         </div>
         {windows.map(window => (
           <button

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import OsContext, {OsContextValues} from '../OsContext';
-import Window from '../widgets/Window';
-import TicTacToeIcon from '../svg/SvgTicTacToeIcon';
+import OsContext, {OsContextValues} from '../os/OsContext';
+import Window from '../os/Window';
+import TicTacToeIcon from '../tictactoe/SvgTicTacToeIcon';
 
 const UP = 38;
 const DOWN = 40;

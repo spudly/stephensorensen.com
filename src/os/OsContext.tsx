@@ -1,7 +1,25 @@
-import {createContext} from 'react';
-import {ProcessDescriptor, WindowDescriptor, AppDescriptor} from './types';
+import * as React from 'react';
+
+interface AppDescriptor {
+  name: string;
+  icon?: React.ComponentType<any> | undefined;
+  component: React.ComponentType<any>;
+}
+
+interface ProcessDescriptor {
+  id: string;
+  app: string;
+}
+
+interface WindowDescriptor {
+  id: string;
+  icon?: React.ComponentType<any> | undefined;
+  title: string;
+  z: number;
+}
 
 interface OsContextValues {
+  // TODO: make singular
   apps: AppDescriptor[];
   processes: ProcessDescriptor[];
   windows: WindowDescriptor[];
@@ -29,7 +47,18 @@ const defaults: OsContextValues = {
   setWindowTitle: () => undefined,
 };
 
-const OsContext = createContext(defaults);
+const OsContext = React.createContext(defaults);
+const {Consumer, Provider} = OsContext;
 
-export {OsContextValues};
+interface WithContext {
+  <Props>(Target: React.ComponentType<OsContextValues & Props>): (
+    props: Exclude<Props, OsContextValues>
+  ) => React.ReactElement<any>;
+}
+
+const withContext: WithContext = Target => props => (
+  <Consumer>{context => <Target {...context} {...props} />}</Consumer>
+);
+
+export {OsContextValues, AppDescriptor, ProcessDescriptor, WindowDescriptor, withContext};
 export default OsContext;
