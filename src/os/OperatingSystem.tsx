@@ -1,13 +1,13 @@
 import * as React from 'react';
-import * as uniqueId from 'uuid/v4';
-import Desktop from '../explorer/Desktop';
+import uniqueId from 'uuid/v4';
 import Processes from './Processes';
 import TaskBar from '../taskbar/TaskBar';
-import ProgMan from '../explorer/ProgMan';
-import ProgManIcon from '../explorer/SvgProgManIcon';
+import Launcher from '../launcher/Launcher';
+import LauncherIcon from '../launcher/SvgLauncherIcon';
 import TicTacToe from '../tictactoe/TicTacToe';
 import Calculator from '../calculator/Calculator';
 import Nibbles from '../nibbles/Nibbles';
+import Editor from '../editor/Editor';
 import OsContext, {
   OsContextValues,
   ProcessDescriptor,
@@ -29,18 +29,14 @@ let nextWindowZ = 0;
 class OperatingSystem extends React.Component<Props, State> {
   state: State = {
     apps: [
-      {name: 'Desktop', component: Desktop},
       {name: 'TaskBar', component: TaskBar},
       {name: 'TicTacToe', icon: TicTacToeIcon, component: TicTacToe},
-      {name: 'ProgMan', icon: ProgManIcon, component: ProgMan},
-      {name: 'Calculator', icon: ProgManIcon, component: Calculator},
+      {name: 'Editor', icon: TicTacToeIcon, component: Editor},
+      {name: 'Launcher', icon: LauncherIcon, component: Launcher},
+      {name: 'Calculator', icon: LauncherIcon, component: Calculator},
       {name: 'Nibbles', icon: TicTacToeIcon, component: Nibbles},
     ],
-    processes: [
-      {id: uniqueId(), app: 'Desktop'},
-      {id: uniqueId(), app: 'TaskBar'},
-      {id: uniqueId(), app: 'ProgMan'},
-    ],
+    processes: [{id: uniqueId(), app: 'TaskBar'}, {id: uniqueId(), app: 'Launcher'}],
     windows: [],
   };
 

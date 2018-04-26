@@ -7,9 +7,9 @@ const TaskBar = () => (
   <OsContext.Consumer>
     {({apps, windows, onWindowFocus}: OsContextValues) => (
       <div className="taskbar">
-        <button style={{display: 'block'}}>s:OS</button>
-        <div style={{background: '#ccc', textAlign: 'right', padding: '0.5em'}}>
-          <Clock format="h:mm:ss A" />
+        <button style={{display: 'block'}}>stuff</button>
+        <div style={{background: '#ccc', textAlign: 'center', padding: '0.5em'}}>
+          <Clock format="h:mm:ss A M/DD/YYYY" />
         </div>
         {windows.map(window => (
           <button

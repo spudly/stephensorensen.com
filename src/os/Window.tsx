@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import * as uniqueId from 'uuid/v4';
+import uniqueId from 'uuid/v4';
 import CloseIcon from './SvgCloseIcon';
 import OsContext, {OsContextValues, withContext} from './OsContext';
 import Component from './Component';

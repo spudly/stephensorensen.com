@@ -1,0 +1,30 @@
+.editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.editor__toolbar {
+  padding: 4px;
+  background: #dfdfdf;
+}
+
+.editor__toolbar > button {
+  background: #dfdfdf;
+  border: 1px solid #ccc;
+}
+
+.editor__toolbar > button:hover {
+  background: #efefef;
+  border: 1px solid #bbb;
+}
+
+.editor__toolbar__spacer {
+  display: inline-block;
+  height: 1px;
+  width: 0.5em;
+}
+
+.editor__content {
+  flex-grow: 1;
+}

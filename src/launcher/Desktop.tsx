@@ -1,12 +1,12 @@
 import * as React from 'react';
 import Icon from './Icon';
 import IconGrid from './IconGrid';
-import ProgManIcon from './SvgProgManIcon';
+import LauncherIcon from './SvgLauncherIcon';
 
 const Desktop = () => (
   <div className="desktop">
     <IconGrid>
-      <Icon key="ProgMan" name="ProgMan" icon={<ProgManIcon />} />
+      <Icon key="Launcher" name="Launcher" icon={<LauncherIcon />} />
     </IconGrid>
   </div>
 );

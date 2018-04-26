@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import * as format from 'date-fns/format';
+import format from 'date-fns/format';
 
 type Props = {
   format: string;
