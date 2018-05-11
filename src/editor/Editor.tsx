@@ -2,6 +2,8 @@ import * as React from 'react';
 import OsContext, {OsContextValues} from '../os/OsContext';
 import Window from '../os/Window';
 import JustifyIcon from './JustifyIcon';
+import Menu from '../menubar/Menu';
+import MenuItem from '../menubar/MenuItem';
 
 interface Props {
   value?: string;
@@ -16,10 +18,12 @@ class Editor extends React.Component<Props, State> {
   foreColor: HTMLInputElement | null = null;
 
   render() {
-    const {state: {value}} = this;
+    const {
+      state: {value},
+    } = this;
     return (
       <div className="editor">
-        <div className="toolbar editor__toolbar">
+        <div className="toolbar">
           <select
             onChange={event => {
               document.execCommand('fontName', false, event.currentTarget.value);
@@ -43,7 +47,7 @@ class Editor extends React.Component<Props, State> {
             <option>7</option>
           </select>
 
-          <div className="editor__toolbar__spacer" />
+          <div className="toolbar__spacer" />
 
           <button type="button" onClick={() => document.execCommand('bold')}>
             <strong>b</strong>
@@ -60,11 +64,18 @@ class Editor extends React.Component<Props, State> {
             onChange={event => document.execCommand('foreColor', false, event.currentTarget.value)}
             hidden
           />
-          <button type="button" onClick={() => this.foreColor.click()}>
+          <button
+            type="button"
+            onClick={() => {
+              if (this.foreColor) {
+                this.foreColor.click();
+              }
+            }}
+          >
             <span style={{color: '#f00'}}>a</span>
           </button>
 
-          <div className="editor__toolbar__spacer" />
+          <div className="toolbar__spacer" />
 
           <button type="button" onClick={() => document.execCommand('justifyLeft')}>
             <JustifyIcon justify="left" />
@@ -92,12 +103,27 @@ class Editor extends React.Component<Props, State> {
   }
 }
 
-const EditorProcess = ({id}: {id: string}) => (
+interface EditorProcessProps {
+  id: string;
+}
+
+const EditorProcess = ({id}: EditorProcessProps) => (
   <OsContext.Consumer>
     {({killProcess}: OsContextValues) => (
-      <Window title="Editor" close={() => killProcess(id)}>
-        <Editor />
-      </Window>
+      <React.Fragment>
+        <Window title="Editor" close={() => killProcess(id)}>
+          <React.Fragment>
+            <Menu horizontal>
+              <MenuItem label="File">
+                <Menu dropdown>
+                  <MenuItem label="Exit" onSelect={() => killProcess(id)} />
+                </Menu>
+              </MenuItem>
+            </Menu>
+            <Editor />
+          </React.Fragment>
+        </Window>
+      </React.Fragment>
     )}
   </OsContext.Consumer>
 );

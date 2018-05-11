@@ -3,10 +3,14 @@ import Icon from './Icon';
 import IconGrid from './IconGrid';
 import LauncherIcon from './SvgLauncherIcon';
 
-const Desktop = () => (
+interface Props {
+  addLauncherWindow: () => void;
+}
+
+const Desktop = ({addLauncherWindow}: Props) => (
   <div className="desktop">
     <IconGrid>
-      <Icon key="Launcher" name="Launcher" icon={<LauncherIcon />} />
+      <Icon key="Launcher" name="Launcher" icon={<LauncherIcon />} execute={addLauncherWindow} />
     </IconGrid>
   </div>
 );

@@ -32,11 +32,10 @@ class OperatingSystem extends React.Component<Props, State> {
       {name: 'TaskBar', component: TaskBar},
       {name: 'TicTacToe', icon: TicTacToeIcon, component: TicTacToe},
       {name: 'Editor', icon: TicTacToeIcon, component: Editor},
-      {name: 'Launcher', icon: LauncherIcon, component: Launcher},
       {name: 'Calculator', icon: LauncherIcon, component: Calculator},
       {name: 'Nibbles', icon: TicTacToeIcon, component: Nibbles},
     ],
-    processes: [{id: uniqueId(), app: 'TaskBar'}, {id: uniqueId(), app: 'Launcher'}],
+    processes: [{id: uniqueId(), app: 'TaskBar'}, {id: uniqueId(), app: 'Editor'}],
     windows: [],
   };
 
@@ -60,6 +59,7 @@ class OperatingSystem extends React.Component<Props, State> {
     });
     return (
       <OsContext.Provider value={context}>
+        <Launcher />
         <Processes />
       </OsContext.Provider>
     );

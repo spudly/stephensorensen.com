@@ -13,3 +13,75 @@
   font-size: 0.75em;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.toolbar {
+  padding: 4px;
+  background: #dfdfdf;
+}
+
+.toolbar > button {
+  background: #dfdfdf;
+  border: 1px solid #ccc;
+}
+
+.toolbar > button {
+  background: #efefef;
+  border: 1px solid #bbb;
+}
+
+.toolbar__spacer {
+  display: inline-block;
+  height: 1px;
+  width: 0.5em;
+}
+
+.menu {
+  background: #dfdfdf;
+  color: black;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.menu--dropdown {
+  border: 1px solid black;
+  position: absolute;
+  display: none;
+  flex-direction: column;
+}
+
+.menu--horizontal {
+  display: flex;
+  padding: 4px 4px 0 4px;
+  margin: 0;
+  width: 100%;
+}
+
+.menu__item {
+  display: block;
+  white-space: nowrap;
+}
+
+.menu__item--active {
+  background: blue;
+  color: white;
+}
+
+.menu--dropdown.menu--open {
+  display: flex;
+}
+
+.menu--dropdown > .menu__item > .menu--dropdown {
+  left: 90%;
+}
+
+.menu__item > button {
+  text-align: left;
+  display: block;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  outline: none;
+  color: inherit;
+}
