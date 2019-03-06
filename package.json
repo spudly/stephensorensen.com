@@ -1,34 +1,20 @@
 {
   "name": "@spudly/stephensorensen.com",
   "private": true,
-  "version": "0.0.9",
-  "devDependencies": {
-    "lint-staged": "^7.0.4",
-    "now": "^11.1.7",
-    "prettier": "^1.12.1",
-    "serve": "^9.4.0"
-  },
+  "version": "0.1.0",
   "scripts": {
-    "now-start": "serve -l 80 src",
-    "start": "serve -l 8080 src",
+    "now-start": "./src/server.js 80",
+    "start": "nodemon ./src/server.js 8080",
     "deploy": "now",
-    "deploy:alias": "now alias",
-    "lint": "eslint src"
+    "deploy:alias": "now alias"
   },
   "now": {
     "alias": "stephensorensen.com"
   },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write --print-width=100 --single-quote --bracket-spacing=false --trailing-comma=all",
-      "git add"
-    ]
-  },
   "engines": {
     "node": "9.x.x"
   },
-  "browserslist": [
-    "last 2 Chrome versions"
-  ]
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
 }
