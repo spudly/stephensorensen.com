@@ -29,6 +29,7 @@ const server = http.createServer(function(req, resp) {
         top: 0;
         width: 100vw;
         height: 100vh;
+        border: 0;
       }
     </style>
   </head>
