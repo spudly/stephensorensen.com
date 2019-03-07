@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ESNEXT",
+    "module": "commonjs",
+    "jsx": "react",
+    "outDir": "./build",
+    "rootDir": "./src",
+    "removeComments": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "lib": ["dom", "es2018"]
+  },
+  "include": ["./src/js/server-side/"]
+}

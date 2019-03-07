@@ -1,0 +1,16 @@
+{
+  "name": "stephensorensen.com",
+  "version": 2,
+  "alias": ["stephensorensen.com", "www.stephensorensen.com"],
+  "github": {
+    "enabled": true,
+    "autoAlias": true,
+    "autoJobCancellation": true
+  },
+  "builds": [
+    { "src": "build/js/server-side/index.js", "use": "@now/node" }
+  ],
+  "routes": [
+      { "src": "/(.*)", "dest": "build/js/server-side/index.js" }
+  ]
+}
