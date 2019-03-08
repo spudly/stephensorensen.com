@@ -8,9 +8,10 @@
     "autoJobCancellation": true
   },
   "builds": [
-    { "src": "build/js/server-side/index.js", "use": "@now/node" }
-  ],
-  "routes": [
-      { "src": "/(.*)", "dest": "build/js/server-side/index.js" }
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": { "distDir": "build" }
+    }
   ]
 }

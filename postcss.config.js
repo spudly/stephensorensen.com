@@ -6,11 +6,8 @@ const config = {
     env({
       browsers: 'last 2 versions',
     }),
+    cssnano(),
   ],
 };
-
-if (process.env.NODE_ENV !== 'development') {
-  config.plugins.push(cssnano());
-}
 
 module.exports = config;
