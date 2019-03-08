@@ -7,7 +7,7 @@ type Props = {
 };
 
 const Index = ({ env = "production" }: Props) => {
-  const reactExt = process.env.NODE_ENV === "development" ? ".min.js" : ".js";
+  const reactExt = env === "development" ? ".development.js" : ".production.min.js";
   return (
     <html lang="en">
       <head>
@@ -20,10 +20,10 @@ const Index = ({ env = "production" }: Props) => {
           dangerouslySetInnerHTML={{ __html: renderToString(<App />) }}
         />
         <script
-          src={`https://unpkg.com/react@16.8.4/umd/react.production${reactExt}`}
+          src={`https://unpkg.com/react@16.8.4/umd/react${reactExt}`}
         />
         <script
-          src={`https://unpkg.com/react-dom@16.8.4/umd/react-dom.production${reactExt}`}
+          src={`https://unpkg.com/react-dom@16.8.4/umd/react-dom${reactExt}`}
         />
         <script src="/index.js" />
       </body>
