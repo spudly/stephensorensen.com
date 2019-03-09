@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import CodeEditor from "./CodeEditor";
 import Screensaver from "./Screensaver";
 import useIsIdle from "./hooks/useIsIdle";

@@ -16,7 +16,7 @@
     "deploy:alias": "now alias"
   },
   "hooks": {
-    "pre-commit": "pretty-quick --staged"
+    "pre-commit": "tsc --noEmit && pretty-quick --staged"
   },
   "engines": {
     "node": ">=8.x.x"
