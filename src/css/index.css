@@ -22,6 +22,10 @@ textarea {
   border: 0;
 }
 
+a {
+  color: darkseagreen;
+}
+
 :root {
   font-family: sans-serif;
 }
