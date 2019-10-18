@@ -11,8 +11,8 @@ const CodeEditor = ({ initialValue }: Props) => {
   //]);
   //return <textarea value={value} onChange={handleValueChange} />;
   return (
-    <pre style={{margin: 0, width: '100vw', height: '100vh'}}>// TODO: create website.
-// In the meantime, checkout my presentation @ Connect.Tech 2019: <a href="https://react-patterns.stephensorensen.com/">Advanced React Design Patterns</a></pre>
+    <pre style={{margin: 0, width: '100vw', height: '100vh'}}>// TODO: create website.{'\n'}
+      // In the meantime, checkout my presentation @ Connect.Tech 2019: <a href="https://react-patterns.stephensorensen.com/">Advanced React Design Patterns</a></pre>
   );
 };
 
